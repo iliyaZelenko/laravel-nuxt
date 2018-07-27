@@ -1,0 +1,48 @@
+{
+  "name": "nuxt_vuetify",
+  "version": "1.0.0",
+  "description": "Nuxt.js + Vuetify.js project",
+  "author": "Ilya Zelenko <iliyazelenkog@gmail.com>",
+  "private": true,
+  "scripts": {
+    "start": "nuxt start",
+    "ssr": "nuxt build && nuxt start",
+    "dev": "laravel-nuxt dev",
+    "build-spa": "laravel-nuxt build",
+    "build-ssr": "nuxt build",
+    "analysis": "laravel-nuxt build -a",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/vue-fontawesome": "^0.0.23",
+    "@nuxtjs/auth": "^4.5.1",
+    "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/dotenv": "^1.1.1",
+    "cookie-universal-nuxt": "^2.0.5",
+    "cropperjs": "^1.4.0",
+    "dayjs": "^1.7.3",
+    "laravel-nuxt": "^1.4.5",
+    "lodash": "^4.17.10",
+    "nuxt": "^1.4.0",
+    "vee-validate": "^2.0.9",
+    "vue-izitoast": "^1.1.0",
+    "vue-notifications": "^0.9.0",
+    "vuetify": "^1.0.18",
+    "vuex-shared-mutations": "^0.0.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
+  }
+}

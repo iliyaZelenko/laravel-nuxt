@@ -1,0 +1,56 @@
+// green lighten-5
+
+
+@require '~vuetify/src/stylus/settings/_colors'
+@require '~vuetify/src/stylus/settings/_theme'
+
+// $theme := {
+//   primary:"#fff"
+//   accent: "#fff"
+//   secondary: "#fff"
+//   info: "#fff"
+//   warning: "#fff"
+//   error: $red.base
+//   success: $green.base
+// }
+
+// $theme:= {
+//   primary: #00adb5, // '#A6CB45', // '#66BB6A',
+//   secondary: #393e46, // '#FAFAFA',
+//   accent: #388E3C,
+//   error: #f44336,
+//   warning: #FFB74D,
+//   info: #2196f3,
+//   success: #4caf50
+// }
+
+// Если для футера $material-light.app-bar = #388E3C green lighten-4
+// $material-dark.app-bar = #222831 // #6A8347 // #43A047
+// #fff
+// http://blueprintcreatives.com/wp-content/uploads/2013/03/pattern.png
+$material-light.background = url(http://qaru.site/img/43ba263df12f60c20cad596e7220cd51.jpg); // #fafafa url(https://cdn.sstatic.net/Sites/unix/img/bg-site.png) repeat center top                       !important   unset // #eeeeee // #E8F5E9
+// https://orig00.deviantart.net/2ee4/f/2014/007/8/f/google_abstract_by_dynamicz34-d718hzj.png
+// $material-light.cards = #C8E6C9
+// Import Vuetify styling
+@require '~vuetify/src/stylus/main.styl'
+
+.application
+  // background-position: center !important;
+  // background-repeat: no-repeat !important;
+  // background-size: cover !important;
+
+.page
+  @extend .fade-transition
+
+.v-alert
+  border-radius: 5px;
+
+.app-border-all-round
+  border-radius: 25px;
+
+.country-flag
+  border: 1px solid #eaecf0;
+  width: 100%;
+
+// .grecaptcha-badge
+//   display: none;
