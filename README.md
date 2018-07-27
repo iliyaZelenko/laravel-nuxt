@@ -1,5 +1,8 @@
 # Laravel Nuxt Auth Starter DEMO
 
+I'm ready to fix all mistakes and i want to make it as cool as possible.
+Project in Russian, but if you are interested yo can put a star, i can translate everything into English.
+
 ## Features
 
 - Laravel 5.6, Nuxt 1.4
