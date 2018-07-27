@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
 
 
     public function makeAdmin($adminNickname) {
-        $adminAvatarBasePath = config('app.url') . '/avatars/forAdminSeed/'; // config('app.url')
+        $adminAvatarBasePath = public_path('avatars/forAdminSeed/');
         $admin = User::firstOrCreate([
             'nickname' => $adminNickname,
             'first_name' => 'Илья',
