@@ -63,11 +63,11 @@
             "@php artisan package:discover"
         ],
         "post-install-cmd": [
-            "cp .env.example .env",
-            "php artisan clear-compiled",
-	        "php artisan key:generate",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan clear-compiled",
+	        "@php artisan key:generate",
 	        "chmod -R 777 storage",
-	        "php artisan passport:keys"
+	        "@php artisan passport:keys"
 	    ]
     },
     "config": {

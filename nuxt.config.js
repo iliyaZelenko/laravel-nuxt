@@ -44,7 +44,7 @@ const commonConfig = {
     { src: '~/plugins/vuex-shared-mutations.js', ssr: false },
     // { src: '~/plugins/ga.js', ssr: false },
     { src: '~/plugins/dayjs.js' },
-    { src: '~/plugins/filters.js' },
+    { src: '~/plugins/filters.js' }
   ],
 
   modules: [
@@ -57,10 +57,8 @@ const commonConfig = {
   css: [
     '~/styles/app.styl'
     // { src: 'flag-icon-css/css/flag-icon.min.css', lang: 'css' }
-    // 'flag-icon-css'
   ],
 
-  // loading: { color: '#3B8070' },
   loading: {
     color: '#1976D2',
     height: '4px'
@@ -69,6 +67,7 @@ const commonConfig = {
   loadingIndicator: {
     name: 'folding-cube'
   },
+
   /*
    ** Авторизация
    */
@@ -87,24 +86,12 @@ const commonConfig = {
     },
     redirect: {
       login: '/auth/signin',
-      callback: '/auth/signin', // TODO сделать красивую страницу
+      callback: '/auth/signin',
       // home: false,
       logout: '/' // возможно логичней не перенаправлять(false)
-      // home: Надо: '/profile/' + $auth.user.nickname Но стоит: '/profile/current-user' // user После входа идет перенаправление на прошлый роут
+      // user: После входа идет перенаправление на прошлый роут
     }
   },
-  // get axios () {
-  //   return {
-  //     // https: true, // production
-  //     // proxy: true
-  //     browserBaseURL: this.env.baseURL,
-  //     baseURL: this.env.baseURL
-  //   }
-  // },
-  // proxy: {
-    // '/api': 'https://ilyaz.herokuapp.com/',
-    // '/api': 'http://127.0.0.1:8000/'
-  // },
 
   generate: {
     routes: [
@@ -129,10 +116,6 @@ const commonConfig = {
       '@fortawesome/fontawesome'
     ],
     extractCSS: true,
-    // webpack plugins
-    // plugins: [
-    //   new Dotenv()
-    // ],
     /*
     ** Run ESLint on save
     */
@@ -149,13 +132,16 @@ const commonConfig = {
   }
 }
 
+// generate spa config
+const spaModeConfig = spa(commonConfig)
 
+// universa(ssr) config
 const universalModeConfig = {
     ...commonConfig,
     mode: 'universal', // (ssr)
     srcDir: 'resources/nuxt',
     generate: {
-        dir: 'storage/app/nuxt',
+        dir: 'storage/app/nuxt'
     },
     axios: {
         browserBaseURL: process.env.APP_URL,
@@ -167,8 +153,25 @@ const universalModeConfig = {
 if (process.env.APP_CLIENT_MODE === 'ssr') {
     module.exports = universalModeConfig
 } else {
-    module.exports = spa(commonConfig)
+    module.exports = spaModeConfig
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
