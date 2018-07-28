@@ -17,8 +17,9 @@
 
 
 Route::get('/config/{name?}', function ($name = 'app') {
-    return config($name);
+    return dd(config($name));
 });
+
 
 
 // Working dev and production variant:
