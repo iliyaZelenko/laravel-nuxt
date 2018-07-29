@@ -82,7 +82,7 @@
       </v-list-tile>
 
 
-      <v-list-tile v-for="email in emailsPublic" :key="email.id">
+      <v-list-tile v-for="email in emailsPublic" :key="'email-' + email.id">
         <v-list-tile-avatar></v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title>{{ email.email }}</v-list-tile-title>
@@ -104,7 +104,7 @@
       </v-list-tile>
 
 
-      <v-list-tile v-for="phone in phonesPublic" :key="phone.id">
+      <v-list-tile v-for="phone in phonesPublic" :key="'phone-' + phone.id">
         <v-list-tile-avatar></v-list-tile-avatar>
         <v-list-tile-action>
           <img :src="getFlag(phone.country)" class="country-flag" style="max-width: 30px;">

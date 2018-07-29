@@ -48,10 +48,10 @@ class CreateEmailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emails');
-
         Schema::table('users', function ($table) {
-            $table->dropColumn('main_email_id');
+            $table->dropForeign(['main_email_id']);
         });
+
+        Schema::dropIfExists('emails');
     }
 }

@@ -23,32 +23,31 @@ if (config('app.client_mode') === 'spa') {
         '{uri}',
         '\\'.Pallares\LaravelNuxt\Controllers\NuxtController::class
     )->where('uri', '.*');
+
+
+    // Working dev and production variant:
+
+    // if (App::environment('local')) {
+    //     Route::get('{uri}', function () {
+    //         $localSource = config('app.client_url') . '/__laravel_nuxt__';
+    //
+    //         return file_get_contents($localSource);
+    //     })->where('uri', '.*');
+    // } else {
+    //     Route::get('{uri}', function ($uri = '/') {
+    //         $sourceByUri = public_path($uri);
+    //         if (is_file($sourceByUri)) {
+    //             return file_get_contents($sourceByUri);
+    //         }
+    //
+    //         $indexSpa = public_path('/_nuxt/index.html');
+    //         $indexGenerated = storage_path('app/nuxt/index.html');
+    //         $existingSource = file_exists($indexSpa) ? $indexSpa : $indexGenerated;
+    //
+    //         return file_get_contents($existingSource);
+    //     })->where('uri', '.*');
+    // }
 }
-
-
-// Working dev and production variant:
-
-// if (App::environment('local')) {
-//     Route::get('{uri}', function () {
-//         $localSource = config('app.client_url') . '/__laravel_nuxt__';
-//
-//         return file_get_contents($localSource);
-//     })->where('uri', '.*');
-// } else {
-//     Route::get('{uri}', function ($uri = '/') {
-//         $sourceByUri = public_path($uri);
-//         if (is_file($sourceByUri)) {
-//             return file_get_contents($sourceByUri);
-//         }
-//
-//         $indexSpa = public_path('/_nuxt/index.html');
-//         $indexGenerated = storage_path('app/nuxt/index.html');
-//         $existingSource = file_exists($indexSpa) ? $indexSpa : $indexGenerated;
-//
-//         return file_get_contents($existingSource);
-//     })->where('uri', '.*');
-// }
-
 
 
 

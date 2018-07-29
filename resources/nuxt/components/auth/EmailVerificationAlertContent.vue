@@ -1,8 +1,13 @@
 <template>
-  <div class="subheading">
+  <div :class="{
+    'subheading': $vuetify.breakpoint.smAndUp,
+    'body-2': $vuetify.breakpoint.xsOnly,
+    'pa-2': true
+  }">
     <!-- Было $auth.user.activated && !$auth.user.email -->
     <div style="overflow-y: auto;">
       <template v-if="contentType === 2">
+
 
         <img src="~/assets/auth/noEmail.svg" width="100%" style="max-width: 70px; float: right; margin-left: 20px;" alt="Нет почты">
 
@@ -89,12 +94,13 @@
           :loading="loading"
           @click="clickRepeatVerificationMail"
           color="primary"
+          round small
         >
           Отправить сообщение повторно
         </v-btn>
       </template>
 
-      <v-btn v-if="underToolbar" @click="$emit('click-hide')">
+      <v-btn v-if="underToolbar" @click="$emit('click-hide')" round small>
         <v-icon left>cancel</v-icon>
         Скрыть
       </v-btn>

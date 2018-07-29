@@ -7,13 +7,18 @@
           :type="getInfoByUserData('alertType')"
           :value="true"
           :style="underToolbarShowMiniMessage ? 'max-width: 900px;': 'max-width: 901px;'"
-          class="email-verification-alert email-verification-alert_under-toolbar"
+          class="email-verification-alert email-verification-alert_under-toolbar py-0 px-2"
 
         >
           <v-slide-y-transition mode="out-in">
             <div v-if="underToolbarShowMiniMessage">
-              <span class="title">{{ getInfoByUserData('title') }}</span>
-              <v-btn @click="underToolbarShowMiniMessage = false" color="primary" class="ml-3">
+              <span :class="{
+                'title': $vuetify.breakpoint.smAndUp,
+                'body-1': $vuetify.breakpoint.xsOnly
+              }">
+                {{ getInfoByUserData('title') }}
+              </span>
+              <v-btn @click="underToolbarShowMiniMessage = false" color="primary" class="mt-1 ml-2" round small>
                 Подробнее
               </v-btn>
             </div>

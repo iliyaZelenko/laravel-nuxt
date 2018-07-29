@@ -67,12 +67,13 @@ class CreateSocialiteTablesAndModifyUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function ($table) {
+            // почему-то нельзя было сделать через один массив
+            $table->dropForeign(['created_through_soc_acc']);
+            $table->dropForeign(['signin_through_soc_acc']);
+        });
+
         Schema::dropIfExists('socialite_provider_user');
         Schema::dropIfExists('socialite_providers');
-
-        Schema::table('users', function ($table) {
-            $table->dropColumn('created_through_soc_acc');
-            $table->dropColumn('signin_through_soc_acc');
-        });
     }
 }

@@ -17,11 +17,10 @@ class CreatePhonesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
 
-            // $table->string('prefix'); // +380
             $table->string('country'); // ISO 3166-1 alpha-3
             $table->string('country2')->nullable(); // ISO 3166-1 alpha-2
             $table->string('prefix');
-            $table->string('number'); // ->unique(); интернациональный формат                    не 0960652658 Формат: \libphonenumber\PhoneNumberFormat::NATIONAL(национальный, не интернациональный, то есть как внутри страны, но когда выдается то преобразуется во всемирный через поле country)
+            $table->string('number'); // интернациональный формат без префикса
             $table->string('label')->nullable();
             $table->boolean('verified'); // подтвержден?
             $table->boolean('public'); // публичный?
@@ -56,10 +55,10 @@ class CreatePhonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phones');
-
         Schema::table('users', function ($table) {
-            $table->dropColumn('main_phone_id');
+            $table->dropForeign(['main_phone_id']);
         });
+
+        Schema::dropIfExists('phones');
     }
 }
