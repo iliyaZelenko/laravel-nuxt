@@ -146,7 +146,6 @@
   import { nicknameMaxSymbols } from '~/tools/Validator'
   import socialiteButtons from '~/components/auth/SocialiteButtons'
   import AppHrText from '~/components/AppHrText'
-  // import groupBy from 'lodash/groupBy'
 
   export default {
     middleware: 'guest',

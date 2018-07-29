@@ -19,11 +19,10 @@ class BaseModel extends Eloquent
         if ($user = auth()->user()) {
             return (parent::asDateTime($value))->timezone($user->timezone);
         }
-        // clock(request()->cookie('guest-timezone'));
+
         if ($guestTimezone = request()->cookie('guest-timezone')) {
             return (parent::asDateTime($value))->timezone($guestTimezone);
         }
-        // Intl.DateTimeFormat().resolvedOptions().timeZone
 
         return parent::asDateTime($value);
     }

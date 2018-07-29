@@ -1,13 +1,5 @@
 <?php
 
-// Route::namespace('Profile')->group(function () {
-//     Route::prefix('profile')->group(function () {
-//         Route::middleware(['auth:api'])->group(function () {
-//             Route::post('set-password', 'SocialiteController@getUserSocialite');
-//         });
-//     });
-// });
-
 Route::group(['namespace' => 'Profile', 'prefix' => 'profile'], function () {
     // Текущий пользователь
     Route::group(['prefix' => 'current', 'middleware' => ['auth:api']], function () {

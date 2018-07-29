@@ -19,18 +19,16 @@ class PhoneResource extends JsonResource
         $numberParsed = $phoneUtil->parse($this->number, $this->country2);
         $numberFormated = $phoneUtil->format($numberParsed, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
         // } catch (\libphonenumber\NumberParseException $e) {
-        //     var_dump($e);
+        //
         // }
 
         return [
             'id' => $this->id,
             'country' => $this->country,
             'country2' => $this->country2,
-            // 'countryFlag' => Countries::where('cca3', $this->country)->first()
             'prefix' => $this->prefix,
             'number' => $this->number,
-            // 'numberFormated' => phone("+$this->prefix$this->number", [$this->country])->ofCountry($this->country)->formatInternational(),
-            'numberFormated' => $numberFormated, // "+$this->prefix$this->number",
+            'numberFormated' => $numberFormated,
             'label' => $this->label,
             'verified' => $this->verified,
             'public' => $this->public,

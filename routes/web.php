@@ -11,15 +11,19 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 
 Route::get('/config/{name?}', function ($name = 'app') {
     return dd(config($name));
 });
 
+if (config('app.client_mode') === 'spa') {
+    // spa serve on dev or production
+    // github.com/skyrpex/laravel-nuxt
+    Route::get(
+        '{uri}',
+        '\\'.Pallares\LaravelNuxt\Controllers\NuxtController::class
+    )->where('uri', '.*');
+}
 
 
 // Working dev and production variant:
@@ -46,14 +50,6 @@ Route::get('/config/{name?}', function ($name = 'app') {
 // }
 
 
-if (config('app.client_mode') === 'spa') {
-    // spa serve on dev or production
-    // github.com/skyrpex/laravel-nuxt
-    Route::get(
-        '{uri}',
-        '\\'.Pallares\LaravelNuxt\Controllers\NuxtController::class
-    )->where('uri', '.*');
-}
 
 
 

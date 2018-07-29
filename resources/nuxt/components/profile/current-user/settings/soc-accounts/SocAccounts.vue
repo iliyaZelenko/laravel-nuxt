@@ -91,7 +91,6 @@
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
   import { mapActions } from 'vuex'
   import differenceBy from 'lodash/differenceBy'
-  // import find from 'lodash/find'
 
   export default {
     components: { FontAwesomeIcon },

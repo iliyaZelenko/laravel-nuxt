@@ -45,8 +45,6 @@ class User extends AuthenticatableForUser
 
     /**
     * The attributes that should be mutated to dates.
-    * !!! Для каждого поля даты я написал геттеры для возвращения с учетом временной зоны
-    * (если добавляете поле даты, то добавляйте геттер)
     */
    protected $dates = [
        'created_at',
@@ -143,8 +141,6 @@ class User extends AuthenticatableForUser
      *Удаляет телефон, меняет главный телефон если надо
      */
     function deletePhone($id) {
-        // $this->mainPhone = null;
-        // $this->save();
         Phone::destroy($id);
 
         if (!$this->mainPhone && $this->phones()->exists()) { // $this->mainPhone &&

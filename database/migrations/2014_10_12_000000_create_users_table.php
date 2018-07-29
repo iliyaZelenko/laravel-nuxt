@@ -23,23 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('timezone')->default(config('app.timezone'));
             $table->boolean('gender')->nullable();
             $table->date('birthday')->nullable();
-
-            // $table->string('avatar')->nullable();
             $table->json('avatar')->nullable();
-
-            // говорит о том может ли пользователь пользоваться основным функционалом сайта,
-            // ставится true если вошел через соц сеть или прикрепил соц сеть или если подтвердил почту
-            // $table->boolean('activated');
-
-
-            // $table->string('email')->nullable()->unique(); // если через соц сеть то может не быть почты
-            // подтверждение почты
-            // $table->boolean('email_verified'); // подтверждена ли почта?
-            // $table->string('email_verification_token')->nullable();
-
-
-            // $table->timestamp('last_login');
-            // $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -54,20 +38,3 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
-
-
-// 15 days visited
-//
-// 43m read time
-//
-// 24 topics viewed
-//
-// 401 posts read
-//
-// 3  given
-//
-// 2 topics created
-//
-// 6 posts created
-//
-// 1  received
