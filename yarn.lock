@@ -1148,8 +1148,8 @@ caniuse-api@^2.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000871"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000871.tgz#f1995c1fe31892649a7605957a80c92518423d4d"
+  version "1.0.30000872"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000872.tgz#3f6e53b63d373768bf99e896133d66ef89c49999"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.30000808, caniuse-lite@^1.0.30000844:
   version "1.0.30000865"
@@ -3324,8 +3324,8 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
 laravel-nuxt@^1.4.5:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/laravel-nuxt/-/laravel-nuxt-1.4.6.tgz#b8ff1986b3e95dd8ff7686318b48fada68f6ee16"
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/laravel-nuxt/-/laravel-nuxt-1.4.7.tgz#89d2a7d503d95c412f02993eccb723e2dfce39cb"
   dependencies:
     "@nuxtjs/axios" "^5.3.1"
     "@nuxtjs/proxy" "^1.2.4"
