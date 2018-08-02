@@ -33,6 +33,7 @@
     "vuex-shared-mutations": "^0.0.3"
   },
   "devDependencies": {
+    "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
@@ -42,6 +43,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.7.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1"
   }

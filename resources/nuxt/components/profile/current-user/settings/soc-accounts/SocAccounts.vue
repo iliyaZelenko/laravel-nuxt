@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-card>
+    <v-card style="border-radius: 20px;">
       <v-layout v-if="socAccounts" justify-center row wrap>
         <!-- md8 lg4 xl3 -->
         <v-flex class="px-2 pb-3" sm10>
@@ -28,10 +28,14 @@
                       icon
                       large
                     >
-                      <v-icon color="red" large>close</v-icon>
+                      <v-icon color="red" large>delete_forever</v-icon>
                     </v-btn>
                   </v-list-tile-action>
                 </v-list-tile>
+                <small class="grey--text ml-4">
+                  Прикреплено {{ account.pivot.created_at | date }}
+                  ({{ $dayjs().to($dayjs(account.pivot.created_at)) }})
+                </small>
                 <v-divider v-if="index + 1 < $auth.user.socAccounts.length"  />
               </template>
             </v-list>

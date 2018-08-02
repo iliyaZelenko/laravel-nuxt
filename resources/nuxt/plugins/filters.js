@@ -13,3 +13,10 @@ Vue.filter('date', date => {
   }
   return Vue.prototype.$dayjs(date).format(process.env.dateFormats.main)
 })
+
+Vue.filter('datetime', date => {
+  if (!date) {
+    return null
+  }
+  return Vue.prototype.$dayjs(date).format(process.env.dateFormats.datetime)
+})

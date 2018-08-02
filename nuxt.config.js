@@ -12,7 +12,8 @@ const commonConfig = {
       sm: 133
     },
     dateFormats: {
-      main: 'YYYY-MM-DD' // DD.MM.YYYY
+      main: 'YYYY-MM-DD', // DD.MM.YYYY
+      datetime: 'YYYY-MM-DD HH:mm:ss'
     }
   },
 
@@ -64,9 +65,10 @@ const commonConfig = {
     height: '4px'
   },
 
-  loadingIndicator: {
-    name: 'folding-cube'
-  },
+  loadingIndicator: '~/layouts/loading.html',
+  // loadingIndicator: {
+  //   name: 'cube-grid' // 'folding-cube'
+  // },
 
   /*
    ** Авторизация

@@ -156,7 +156,10 @@ class User extends AuthenticatableForUser
      */
     public function socAccounts()
     {
-      return $this->belongsToMany(SocialiteProvider::class); // , 'socialite_provider_user', 'user_id', 'provider_id'
+        // , 'socialite_provider_user', 'user_id', 'provider_id'
+        return $this->belongsToMany(SocialiteProvider::class)
+            ->using(SocialiteProviderUser::class)
+            ->withTimestamps();
     }
 
     /**
@@ -164,7 +167,7 @@ class User extends AuthenticatableForUser
      */
     public function emails()
     {
-      return $this->hasMany(Email::class);
+        return $this->hasMany(Email::class);
     }
 
     /**
@@ -172,7 +175,7 @@ class User extends AuthenticatableForUser
      */
     public function phones()
     {
-      return $this->hasMany(Phone::class);
+        return $this->hasMany(Phone::class);
     }
 
     /**
@@ -180,7 +183,7 @@ class User extends AuthenticatableForUser
      */
     public function passwordsHistory()
     {
-      return $this->hasMany(UserPasswordHistroy::class);
+        return $this->hasMany(UserPasswordHistroy::class);
     }
 
 

@@ -57,7 +57,7 @@
         </v-btn>
       </label> -->
       <!-- multiple -->
-      <app-img-loader
+      <vue-images-manager
         upload-url="/api/profile/current/set-avatar"
         @change="onChange"
         @done="onUploadDone"
@@ -88,7 +88,7 @@
           <!-- {{ progress }} / 100%
           <v-progress-linear v-model="progress" /> -->
         </div>
-      </app-img-loader>
+      </vue-images-manager>
 
       <!-- @change="onFileChange" -->
       <!-- v-validate="'image'" -->
@@ -107,12 +107,14 @@
   import 'cropperjs/dist/cropper.css'
   import { msg } from '~/tools/helpers'
   import UserAvatar from '~/components/user/UserAvatar'
-  import AppImgLoader from '~/components/AppImgLoader'
-
+  // import 'vue-images-manager'
+  // import AppImgLoader from '~/components/AppImgLoader'
+  // import AppImgLoader from 'vue-images-manager'
+  // require('vue-images-manager')
   // require('/cropperjs/cropper.css')
-
+  // app-img-loader , vueImagesManager
   export default {
-    components: { UserAvatar, AppImgLoader },
+    components: { UserAvatar },
     data: () => ({
       progress: null,
       avatarFormData: null,

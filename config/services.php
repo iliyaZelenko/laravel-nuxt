@@ -41,7 +41,7 @@ return [
         'client_secret' => env('VKONTAKTE_SECRET'),
         'redirect' => env('APP_CLIENT_URL') . env('VKONTAKTE_REDIRECT_URI'),
     ],
-    // почему-то когда удаляю тут именно фейсбук, то он не работает.
+    // ??? почему-то когда удаляю тут именно фейсбук, то он не работает.
     'facebook' => [
         'client_id' => env('FACEBOOK_KEY'),
         'client_secret' => env('FACEBOOK_SECRET'),

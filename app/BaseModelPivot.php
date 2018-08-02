@@ -3,10 +3,10 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use App\Traits\BaseModelTimezones;
 
-class BaseModel extends Eloquent
+class BaseModelPivot extends Pivot
 {
     use BaseModelTimezones;
 }

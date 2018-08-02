@@ -28,7 +28,7 @@
             >
               <span class="mr-1">
                 <v-tooltip v-if="item.verified" bottom>
-                  <v-icon slot="activator" color="success">check</v-icon>
+                  <v-icon slot="activator" color="success">check_circle</v-icon>
                   <span>Подтвержденный адрес</span>
                 </v-tooltip>
                 <v-tooltip v-else bottom>
@@ -44,7 +44,7 @@
             >
              <span class="mr-3">
                <v-tooltip v-if="item.verified" bottom>
-                 <v-icon slot="activator" color="success">check</v-icon>
+                 <v-icon slot="activator" color="success">check_circle</v-icon>
                  <span>Подтвержденный адрес</span>
                </v-tooltip>
                <v-tooltip v-else bottom>

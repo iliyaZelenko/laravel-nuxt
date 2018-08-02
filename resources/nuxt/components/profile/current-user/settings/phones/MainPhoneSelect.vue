@@ -16,6 +16,18 @@
     >
       <img :src="getFlag(item.country)" class="country-flag" style="max-width: 30px;">
       <span class="ml-2">{{ item.numberFormated }}</span>
+
+      <span class="ml-1">
+        <v-tooltip v-if="item.verified" bottom>
+          <v-icon slot="activator" color="success">check_circle</v-icon>
+          <span>Подтвержденный адрес</span>
+        </v-tooltip>
+        <v-tooltip v-else bottom>
+          <v-icon slot="activator" color="error">error</v-icon>
+          <span>Неподтвержденный адрес</span>
+        </v-tooltip>
+      </span>
+
     </template>
     <template
       slot="item"
@@ -23,6 +35,17 @@
     >
       <img :src="getFlag(item.country)" class="country-flag" style="max-width: 30px;">
       <span class="ml-2">{{ item.numberFormated }}</span>
+
+      <span class="ml-2">
+        <v-tooltip v-if="item.verified" bottom>
+          <v-icon slot="activator" color="success">check_circle</v-icon>
+          <span>Подтвержденный адрес</span>
+        </v-tooltip>
+        <v-tooltip v-else bottom>
+          <v-icon slot="activator" color="error">error</v-icon>
+          <span>Неподтвержденный адрес</span>
+        </v-tooltip>
+      </span>
     </template>
   </v-select>
 </template>
