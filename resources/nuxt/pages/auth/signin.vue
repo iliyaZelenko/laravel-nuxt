@@ -141,62 +141,62 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import validatorMixin from '~/mixins/validator'
-  import { nicknameMaxSymbols } from '~/tools/Validator'
-  import socialiteButtons from '~/components/auth/SocialiteButtons'
-  import AppHrText from '~/components/AppHrText'
+import { mapActions } from 'vuex'
+import validatorMixin from '~/mixins/validator'
+import { nicknameMaxSymbols } from '~/tools/Validator'
+import socialiteButtons from '~/components/auth/SocialiteButtons'
+import AppHrText from '~/components/AppHrText'
 
-  export default {
-    middleware: 'guest',
-    mixins: [validatorMixin],
-    components: { socialiteButtons, AppHrText },
-    data: () => ({
-      form: {
-        email: 'iliyazelenkog@gmail.com',
-        nickname: 'Ilya-Zelenko',
-        password: 'secret'
-      },
-      emailOrNickname: 'email',
-      passwordShow: true,
-      loadingBtn: false,
-      nicknameMaxSymbols
-      // error: false
-    }),
-    methods: {
-      async submit () {
-        const data = {
-          password: this.form.password,
-          [this.emailOrNickname]: this.form[this.emailOrNickname]
-        }
-
-        console.log(data)
-
-        if (await this.validateByMixin(data)) {
-          this.loadingBtn = true
-          await this.signin({ data })
-          this.loadingBtn = false
-        }
-      },
-      ...mapActions('auth', [
-        'signin'
-      ])
+export default {
+  middleware: 'guest',
+  mixins: [validatorMixin],
+  components: { socialiteButtons, AppHrText },
+  data: () => ({
+    form: {
+      email: 'iliyazelenkog@gmail.com',
+      nickname: 'Ilya-Zelenko',
+      password: 'secret'
     },
-    computed: {
-      formErrors () {
-        return this.errors.items.filter(i => i.field === this.emailOrNickname || i.field === 'password')
-      },
-      btnDisabled () {
-        return !!this.formErrors.length
+    emailOrNickname: 'email',
+    passwordShow: true,
+    loadingBtn: false,
+    nicknameMaxSymbols
+    // error: false
+  }),
+  methods: {
+    async submit () {
+      const data = {
+        password: this.form.password,
+        [this.emailOrNickname]: this.form[this.emailOrNickname]
+      }
+
+      console.log(data)
+
+      if (await this.validateByMixin(data)) {
+        this.loadingBtn = true
+        await this.signin({ data })
+        this.loadingBtn = false
       }
     },
-    head () {
-      return {
-        title: 'Страница входа',
-        meta: [
-          { content: 'Это страница входа', name: 'description', hid: 'description' }
-        ]
-      }
+    ...mapActions('auth', [
+      'signin'
+    ])
+  },
+  computed: {
+    formErrors () {
+      return this.errors.items.filter(i => i.field === this.emailOrNickname || i.field === 'password')
+    },
+    btnDisabled () {
+      return !!this.formErrors.length
+    }
+  },
+  head () {
+    return {
+      title: 'Страница входа',
+      meta: [
+        { content: 'Это страница входа', name: 'description', hid: 'description' }
+      ]
     }
   }
-  </script>
+}
+</script>

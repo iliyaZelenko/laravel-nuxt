@@ -135,22 +135,22 @@
 </template>
 
 <script>
-  import { getFlag } from '~/tools/helpers'
+import { getFlag } from '~/tools/helpers'
 
-  export default {
-    props: ['user'],
-    computed: {
-      emailsPublic () {
-        return this.user.emails.filter(i => i.public)
-      },
-      phonesPublic () {
-        return this.user.phones.filter(i => i.public)
-      }
+export default {
+  props: ['user'],
+  computed: {
+    emailsPublic () {
+      return this.user.emails.filter(i => i.public)
     },
-    methods: {
-      getFlag
+    phonesPublic () {
+      return this.user.phones.filter(i => i.public)
     }
+  },
+  methods: {
+    getFlag
   }
+}
 </script>
 
 <style>

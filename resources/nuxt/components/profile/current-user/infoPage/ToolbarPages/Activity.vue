@@ -140,12 +140,12 @@
 </template>
 
 <script>
-  import avatar from '~/components/user/UserAvatar.vue'
+import avatar from '~/components/user/UserAvatar.vue'
 
-  export default {
-    props: {
-      user: Object
-    },
-    components: { avatar }
-  }
+export default {
+  props: {
+    user: Object
+  },
+  components: { avatar }
+}
 </script>

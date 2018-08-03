@@ -24,23 +24,23 @@
 </template>
 
 <script>
-  import helperScrollMixin from '~/mixins/helpers/scroll'
+import helperScrollMixin from '~/mixins/helpers/scroll'
 
-  export default {
-    mixins: [helperScrollMixin],
-    computed: {
-      title () {
-        const titles = {
-          '/profile/settings': 'Главная информация',
-          '/profile/settings/soc-accounts': 'Прикрепленные аккаунты',
-          '/profile/settings/password': 'Добавление пароля',
-          '/profile/settings/notifications': 'Уведомления',
-          '/profile/settings/emails': 'Электронные адреса'
-        }
-        titles['/profile/settings/password'] = this.$auth.user.password ? 'Смена пароля' : 'Добавление пароля'
-
-        return titles[this.$route.path]
+export default {
+  mixins: [helperScrollMixin],
+  computed: {
+    title () {
+      const titles = {
+        '/profile/settings': 'Главная информация',
+        '/profile/settings/soc-accounts': 'Прикрепленные аккаунты',
+        '/profile/settings/password': 'Добавление пароля',
+        '/profile/settings/notifications': 'Уведомления',
+        '/profile/settings/emails': 'Электронные адреса'
       }
+      titles['/profile/settings/password'] = this.$auth.user.password ? 'Смена пароля' : 'Добавление пароля'
+
+      return titles[this.$route.path]
     }
   }
+}
 </script>

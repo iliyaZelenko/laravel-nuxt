@@ -55,39 +55,39 @@
 </template>
 
 <script>
-  // import { mapGetters } from 'vuex'
-  import UserAvatar from '~/components/user/UserAvatar'
+// import { mapGetters } from 'vuex'
+import UserAvatar from '~/components/user/UserAvatar'
 
-  export default {
-    components: { UserAvatar },
-    data () {
-      return {
-        selected: [0, 1],
-        items: [
-          { action: '15 min', headline: 'Brunch this weekend?', title: 'Ali Connors', subtitle: "I'll be in your neighborhood doing ?" },
-          { action: '2 hr', headline: 'Summer BBQ', title: 'me, Scrott, Jennifer', subtitle: "Wish I could come, but I'm out " },
-          { action: '6 hr', headline: 'Oui oui', title: 'Sandra Adams', subtitle: 'Do you have Paris recommendations?' },
-          { action: '12 hr', headline: 'Birthday gift', title: 'Trevor Hansen', subtitle: 'Have any ideas about what' },
-          { action: '18hr', headline: 'Recipe to try', title: 'Britta Holt', subtitle: 'We should eat this: Grate, Squash' }
-        ]
-      }
-    },
+export default {
+  components: { UserAvatar },
+  data () {
+    return {
+      selected: [0, 1],
+      items: [
+        { action: '15 min', headline: 'Brunch this weekend?', title: 'Ali Connors', subtitle: "I'll be in your neighborhood doing ?" },
+        { action: '2 hr', headline: 'Summer BBQ', title: 'me, Scrott, Jennifer', subtitle: "Wish I could come, but I'm out " },
+        { action: '6 hr', headline: 'Oui oui', title: 'Sandra Adams', subtitle: 'Do you have Paris recommendations?' },
+        { action: '12 hr', headline: 'Birthday gift', title: 'Trevor Hansen', subtitle: 'Have any ideas about what' },
+        { action: '18hr', headline: 'Recipe to try', title: 'Britta Holt', subtitle: 'We should eat this: Grate, Squash' }
+      ]
+    }
+  },
 
-    methods: {
-      toggle (index) {
-        const i = this.selected.indexOf(index)
+  methods: {
+    toggle (index) {
+      const i = this.selected.indexOf(index)
 
-        if (i > -1) {
-          this.selected.splice(i, 1)
-        } else {
-          this.selected.push(index)
-        }
+      if (i > -1) {
+        this.selected.splice(i, 1)
+      } else {
+        this.selected.push(index)
       }
     }
-    // computed: {
-    //   ...mapGetters('user', ['userAvatar'])
-    // }
   }
+  // computed: {
+  //   ...mapGetters('user', ['userAvatar'])
+  // }
+}
 </script>
 
 <style scoped>

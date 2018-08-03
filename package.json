@@ -33,7 +33,6 @@
     "vuex-shared-mutations": "^0.0.3"
   },
   "devDependencies": {
-    "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",

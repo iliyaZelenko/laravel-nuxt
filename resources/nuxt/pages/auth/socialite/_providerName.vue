@@ -52,121 +52,121 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import SignupForm from '~/components/auth/SignupForm'
+import { mapActions } from 'vuex'
+import SignupForm from '~/components/auth/SignupForm'
 
-  export default {
-    components: { SignupForm },
-    data: () => ({
-      form: {},
-      userSocResponse: null,
-      haveEmail: null,
-      saveSocAccLoading: false
-      // formLoading: false
-    }),
-    methods: {
-      // отправка формы создания нового юзера для соц сети
-      async submitNewUser () {
-        // TODO Тут просто как и в signup странице, но передать данные о UserSoc
-        const { data } = this.form
-        // let dataForValidate = this.form.data
-        //
-        // // если не выбран вход через пароль и почту/ник
-        // if (!this.form.passwordVariantAuthChoose) {
-        //   const { nickname } = this.form.data
-        //   dataForValidate = { nickname }
-        // }
-        //
-        // console.log(dataForValidate)
-        //
-        // if (await this.validateByMixin(dataForValidate)) {
-        // this.formLoading = true
-        // alert('ok')
-        const doAuth = await this.signup({
-          form: data,
-          userSoc: this.user,
-          providerName: this.providerName
-        })
+export default {
+  components: { SignupForm },
+  data: () => ({
+    form: {},
+    userSocResponse: null,
+    haveEmail: null,
+    saveSocAccLoading: false
+    // formLoading: false
+  }),
+  methods: {
+    // отправка формы создания нового юзера для соц сети
+    async submitNewUser () {
+      // TODO Тут просто как и в signup странице, но передать данные о UserSoc
+      const { data } = this.form
+      // let dataForValidate = this.form.data
+      //
+      // // если не выбран вход через пароль и почту/ник
+      // if (!this.form.passwordVariantAuthChoose) {
+      //   const { nickname } = this.form.data
+      //   dataForValidate = { nickname }
+      // }
+      //
+      // console.log(dataForValidate)
+      //
+      // if (await this.validateByMixin(dataForValidate)) {
+      // this.formLoading = true
+      // alert('ok')
+      const doAuth = await this.signup({
+        form: data,
+        userSoc: this.user,
+        providerName: this.providerName
+      })
 
-        // вход используя токены и объект пользователя
-        await this.signinManually(doAuth)
+      // вход используя токены и объект пользователя
+      await this.signinManually(doAuth)
 
-        this.$notify.success(`Аккаунт создан через ${this.providerName}.`)
-        // this.formLoading = false
-        // }
-      },
-      async justSignIn () {
-        const info = this.userSocResponse.doAuth
-        // вход используя токены и объект пользователя
-        await this.signinManually(info)
-        this.$notify.success(`Вход через ${this.providerName} выполнен.`)
-        this.$router.push('/profile/' + info.user.nickname)
-      },
-      checkAccessDenied () {
-        const error = this.$route.query.error
-        if (error) {
-          if (error === 'access_denied') {
-            this.$notify.error('Доступ отклонен')
-            this.$router.push(this.$auth.loggedIn ? '/profile/settings/soc-accounts' : '/auth/signin')
-          } else {
-            // в теории никаких еще ошибок не должно произойти
-            this.$notify.error(error)
-          }
-        }
-      },
-      ...mapActions('authSocialite', [
-        'getUserSocialite', 'saveSocAcc' // 'loginSocialite', 'handleSocialite',
-      ]),
-      ...mapActions('auth', [
-        'signup', 'signinManually'
-      ])
+      this.$notify.success(`Аккаунт создан через ${this.providerName}.`)
+      // this.formLoading = false
+      // }
     },
-    computed: {
-      code () {
-        return this.$route.query.code
-      },
-      providerName () {
-        return this.$route.params.providerName
-      },
-      user () {
-        return this.userSocResponse && this.userSocResponse.user
+    async justSignIn () {
+      const info = this.userSocResponse.doAuth
+      // вход используя токены и объект пользователя
+      await this.signinManually(info)
+      this.$notify.success(`Вход через ${this.providerName} выполнен.`)
+      this.$router.push('/profile/' + info.user.nickname)
+    },
+    checkAccessDenied () {
+      const error = this.$route.query.error
+      if (error) {
+        if (error === 'access_denied') {
+          this.$notify.error('Доступ отклонен')
+          this.$router.push(this.$auth.loggedIn ? '/profile/settings/soc-accounts' : '/auth/signin')
+        } else {
+          // в теории никаких еще ошибок не должно произойти
+          this.$notify.error(error)
+        }
       }
     },
-    async mounted () {
-      this.checkAccessDenied()
+    ...mapActions('authSocialite', [
+      'getUserSocialite', 'saveSocAcc' // 'loginSocialite', 'handleSocialite',
+    ]),
+    ...mapActions('auth', [
+      'signup', 'signinManually'
+    ])
+  },
+  computed: {
+    code () {
+      return this.$route.query.code
+    },
+    providerName () {
+      return this.$route.params.providerName
+    },
+    user () {
+      return this.userSocResponse && this.userSocResponse.user
+    }
+  },
+  async mounted () {
+    this.checkAccessDenied()
 
-      const providerName = this.providerName
-      const code = this.code
-      const payloads = {code, providerName, loggedIn: this.$auth.loggedIn}
+    const providerName = this.providerName
+    const code = this.code
+    const payloads = {code, providerName, loggedIn: this.$auth.loggedIn}
 
-      try {
-        this.userSocResponse = await this.getUserSocialite(payloads)
+    try {
+      this.userSocResponse = await this.getUserSocialite(payloads)
 
-        if (this.$auth.loggedIn) {
-          this.saveSocAccLoading = true
-          await this.saveSocAcc({
-            userSoc: this.user,
-            providerName
-          })
-        } else {
-          // если акк прикреплен к юзеру из соц сети
-          if (this.userSocResponse.doAuth) {
-            this.justSignIn()
-          } else { // если акк не прикреплен ни какому юзеру, то юзеру нужно заполнить форму регестрации и отправить запрос на регестрацию где ему прикрепят соц акк
-            const { email, nickname } = this.user
-            // ставит данные в форму из соц акка, сделал чтобы не ставились лишние свойства
-            this.form.data = { email, nickname }
-            this.haveEmail = !!email
-          }
+      if (this.$auth.loggedIn) {
+        this.saveSocAccLoading = true
+        await this.saveSocAcc({
+          userSoc: this.user,
+          providerName
+        })
+      } else {
+        // если акк прикреплен к юзеру из соц сети
+        if (this.userSocResponse.doAuth) {
+          this.justSignIn()
+        } else { // если акк не прикреплен ни какому юзеру, то юзеру нужно заполнить форму регестрации и отправить запрос на регестрацию где ему прикрепят соц акк
+          const { email, nickname } = this.user
+          // ставит данные в форму из соц акка, сделал чтобы не ставились лишние свойства
+          this.form.data = { email, nickname }
+          this.haveEmail = !!email
         }
-      } catch ({ response }) {
-        const status = response.status
+      }
+    } catch ({ response }) {
+      const status = response.status
 
-        if (status === 401 || status === 400) {
-          this.$notify.error(response.data.message)
-          this.$router.push(this.$auth.loggedIn ? '/profile/settings/soc-accounts' : '/auth/signin')
-        }
+      if (status === 401 || status === 400) {
+        this.$notify.error(response.data.message)
+        this.$router.push(this.$auth.loggedIn ? '/profile/settings/soc-accounts' : '/auth/signin')
       }
     }
   }
+}
 </script>

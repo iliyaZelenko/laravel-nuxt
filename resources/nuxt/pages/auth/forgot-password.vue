@@ -110,48 +110,48 @@
 </template>
 
 <script>
-  import validatorMixin from '~/mixins/validator'
-  import { mapActions, mapGetters } from 'vuex'
+import validatorMixin from '~/mixins/validator'
+import { mapActions, mapGetters } from 'vuex'
 
-  export default {
-    mixins: [validatorMixin],
-    data () {
-      return {
-        form: {
-          email: this.$auth.loggedIn ? this.$auth.user.mainEmail.email : null,
-          nickname: null
-        },
-        emailOrNickname: 'email',
-        btnLoading: false,
-        sent: false
+export default {
+  mixins: [validatorMixin],
+  data () {
+    return {
+      form: {
+        email: this.$auth.loggedIn ? this.$auth.user.mainEmail.email : null,
+        nickname: null
+      },
+      emailOrNickname: 'email',
+      btnLoading: false,
+      sent: false
+    }
+  },
+  methods: {
+    async submit () {
+      const data = {
+        [this.emailOrNickname]: this.form[this.emailOrNickname]
+      }
+
+      if (await this.validateByMixin(data)) {
+        this.btnLoading = true
+        if (await this.resetPasswordSendEmail(data)) {
+          this.sent = true
+        }
+        this.btnLoading = false
       }
     },
-    methods: {
-      async submit () {
-        const data = {
-          [this.emailOrNickname]: this.form[this.emailOrNickname]
-        }
-
-        if (await this.validateByMixin(data)) {
-          this.btnLoading = true
-          if (await this.resetPasswordSendEmail(data)) {
-            this.sent = true
-          }
-          this.btnLoading = false
-        }
-      },
-      ...mapActions('auth', [
-        'resetPasswordSendEmail'
-      ])
+    ...mapActions('auth', [
+      'resetPasswordSendEmail'
+    ])
+  },
+  computed: {
+    formErrors () {
+      return this.errors.items.filter(i => i.field === this.emailOrNickname)
     },
-    computed: {
-      formErrors () {
-        return this.errors.items.filter(i => i.field === this.emailOrNickname)
-      },
-      btnDisabled () {
-        return !!this.formErrors.length
-      },
-      ...mapGetters('user', ['userCanUseEmail'])
-    }
+    btnDisabled () {
+      return !!this.formErrors.length
+    },
+    ...mapGetters('user', ['userCanUseEmail'])
   }
+}
 </script>

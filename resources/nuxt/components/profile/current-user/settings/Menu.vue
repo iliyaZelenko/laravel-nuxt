@@ -109,14 +109,14 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      notificationsGetColor () {
-        return !this.$auth.user.mainEmail ? 'error' : !this.$auth.user.mainEmail.verified ? 'warning' : ''
-      },
-      changePasswordGetColor () {
-        return this.$auth.user.passwordLongTimeNotChange ? 'warning' : ''
-      }
+export default {
+  computed: {
+    notificationsGetColor () {
+      return !this.$auth.user.mainEmail ? 'error' : !this.$auth.user.mainEmail.verified ? 'warning' : ''
+    },
+    changePasswordGetColor () {
+      return this.$auth.user.passwordLongTimeNotChange ? 'warning' : ''
     }
   }
+}
 </script>

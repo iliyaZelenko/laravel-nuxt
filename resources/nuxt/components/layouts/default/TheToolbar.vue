@@ -110,21 +110,21 @@
 </template>
 
 <script>
-  import TheToolbarUserNotifications from '~/components/layouts/default/TheToolbarUserNotifications'
-  import TheToolbarUserMenu from '~/components/layouts/default/TheToolbarUserMenu'
+import TheToolbarUserNotifications from '~/components/layouts/default/TheToolbarUserNotifications'
+import TheToolbarUserMenu from '~/components/layouts/default/TheToolbarUserMenu'
 
-  export default {
-    components: { TheToolbarUserNotifications, TheToolbarUserMenu },
-    data: () => ({
-      tabs: [
-        {text: 'Главаня', to: '/', icon: 'home'},
-        {text: 'О нас', to: '/#1'},
-        {text: 'Цены', to: '/#2'},
-        {text: 'Форум', to: '/#3'},
-        {text: 'Поддержка', to: '/#4'}
-      ]
-    })
-  }
+export default {
+  components: { TheToolbarUserNotifications, TheToolbarUserMenu },
+  data: () => ({
+    tabs: [
+      {text: 'Главаня', to: '/', icon: 'home'},
+      {text: 'О нас', to: '/#1'},
+      {text: 'Цены', to: '/#2'},
+      {text: 'Форум', to: '/#3'},
+      {text: 'Поддержка', to: '/#4'}
+    ]
+  })
+}
 </script>
 
 <style>

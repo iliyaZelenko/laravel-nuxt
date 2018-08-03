@@ -61,88 +61,88 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import AppHrText from '~/components/AppHrText'
-  import socialiteButtons from '~/components/auth/SocialiteButtons'
-  import SignupForm from '~/components/auth/SignupForm'
+import { mapActions } from 'vuex'
+import AppHrText from '~/components/AppHrText'
+import socialiteButtons from '~/components/auth/SocialiteButtons'
+import SignupForm from '~/components/auth/SignupForm'
 
-  export default {
-    middleware: 'guest',
-    components: { AppHrText, socialiteButtons, SignupForm },
-    data: () => ({
-      showForm: false,
-      form: {},
-      // captchaResponse: null,
-      captchaLoaded: false,
-      captchaKey: '6LcpH18UAAAAAJ7IxDGeA4TtQdBDTYA4xL4QSkvA'
-      // btnLoading: false
-    }),
-    methods: {
-      async submit (captchaResponse) {
-        let { data } = this.form
-        // const k = '6LcpH18UAAAAAGlQkpW90lJIdwZjRdToblUBsoNc'
-        // const data = await this.$axios.$post(`https://www.google.com/recaptcha/api/siteverify?secret=${k}&response=${this.captchaResponse}`)
-        // console.log(data)
-        //
-        // if (await this.validateByMixin(data)) {
-        // this.btnLoading = true
-        // const captchaResponse = await window.grecaptcha.execute(this.captchaKey, {action: 'homepage'})
+export default {
+  middleware: 'guest',
+  components: { AppHrText, socialiteButtons, SignupForm },
+  data: () => ({
+    showForm: false,
+    form: {},
+    // captchaResponse: null,
+    captchaLoaded: false,
+    captchaKey: '6LcpH18UAAAAAJ7IxDGeA4TtQdBDTYA4xL4QSkvA'
+    // btnLoading: false
+  }),
+  methods: {
+    async submit (captchaResponse) {
+      let { data } = this.form
+      // const k = '6LcpH18UAAAAAGlQkpW90lJIdwZjRdToblUBsoNc'
+      // const data = await this.$axios.$post(`https://www.google.com/recaptcha/api/siteverify?secret=${k}&response=${this.captchaResponse}`)
+      // console.log(data)
+      //
+      // if (await this.validateByMixin(data)) {
+      // this.btnLoading = true
+      // const captchaResponse = await window.grecaptcha.execute(this.captchaKey, {action: 'homepage'})
 
-        // console.log(!!captchaResponse, data)
-        await this.signup({ form: data, captchaResponse })
-        // this.btnLoading = false
-        // }
-      },
-      ...mapActions('auth', [
-        'signup'
-      ])
+      // console.log(!!captchaResponse, data)
+      await this.signup({ form: data, captchaResponse })
+      // this.btnLoading = false
+      // }
     },
-    beforeMount () {
-      window.onloadCallback = () => {
-        this.captchaLoaded = true
-        // window.grecaptcha.render('g-recaptcha', {
-        //   sitekey: '6LdxzGAUAAAAAB-7jgghBCMhn4NPYJzcHLtV2QMN',
-        //   callback: token => {
-        //     alert(token)
-        //   },
-        //   theme: 'dark' // light
-        // })
-      }
-    },
-    // mounted () {
-    // if (process.client) {
-    //   window.grecaptcha.ready(() => {
-    //     window.grecaptcha.execute(this.captchaKey, {action: 'homepage'}).then(token => {
-    //       this.captchaResponse = token
-    //       console.log(token)
-    //       //
-    //     })
-    //   })
-    // }
-    // },
-    // created () {
-    //   if (window.grecaptcha) {
-    //     window.grecaptcha.ready(() => {
-    //       window.grecaptcha.execute(this.captchaKey, {action: 'homepage'}).then(token => {
-    //         console.log(token)
-    //         //
-    //       })
-    //     })
-    //   }
-    // },
-    head () {
-      return {
-        title: 'Страница регестрации',
-        meta: [
-          { content: 'Это страница регестрации', name: 'description', hid: 'description' }
-        ],
-        script: [
-          // { src: `https://www.google.com/recaptcha/api.js?render=${this.captchaKey}` }
-          // Язык: &hl=uk
-          // Ручной рендеринг &render=explicit
-          { src: 'https://www.google.com/recaptcha/api.js?onload=onloadCallback', async: true, defer: true }
-        ]
-      }
+    ...mapActions('auth', [
+      'signup'
+    ])
+  },
+  beforeMount () {
+    window.onloadCallback = () => {
+      this.captchaLoaded = true
+      // window.grecaptcha.render('g-recaptcha', {
+      //   sitekey: '6LdxzGAUAAAAAB-7jgghBCMhn4NPYJzcHLtV2QMN',
+      //   callback: token => {
+      //     alert(token)
+      //   },
+      //   theme: 'dark' // light
+      // })
+    }
+  },
+  // mounted () {
+  // if (process.client) {
+  //   window.grecaptcha.ready(() => {
+  //     window.grecaptcha.execute(this.captchaKey, {action: 'homepage'}).then(token => {
+  //       this.captchaResponse = token
+  //       console.log(token)
+  //       //
+  //     })
+  //   })
+  // }
+  // },
+  // created () {
+  //   if (window.grecaptcha) {
+  //     window.grecaptcha.ready(() => {
+  //       window.grecaptcha.execute(this.captchaKey, {action: 'homepage'}).then(token => {
+  //         console.log(token)
+  //         //
+  //       })
+  //     })
+  //   }
+  // },
+  head () {
+    return {
+      title: 'Страница регестрации',
+      meta: [
+        { content: 'Это страница регестрации', name: 'description', hid: 'description' }
+      ],
+      script: [
+        // { src: `https://www.google.com/recaptcha/api.js?render=${this.captchaKey}` }
+        // Язык: &hl=uk
+        // Ручной рендеринг &render=explicit
+        { src: 'https://www.google.com/recaptcha/api.js?onload=onloadCallback', async: true, defer: true }
+      ]
     }
   }
+}
 </script>

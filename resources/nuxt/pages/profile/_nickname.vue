@@ -49,75 +49,75 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import MainInfo from '~/components/profile/current-user/infoPage/MainInfo'
-  import ProfileCover from '~/components/profile/current-user/infoPage/Cover'
-  import ProfileToolbar from '~/components/profile/current-user/infoPage/Toolbar'
-  import ProfileToolbarPageActivity from '~/components/profile/current-user/infoPage/ToolbarPages/Activity'
-  import ProfileToolbarPageFriends from '~/components/profile/current-user/infoPage/ToolbarPages/Friends'
-  import ProfileToolbarPagePhoto from '~/components/profile/current-user/infoPage/ToolbarPages/Photo'
-  import ProfileToolbarPageNews from '~/components/profile/current-user/infoPage/ToolbarPages/News'
+import { mapActions } from 'vuex'
+import MainInfo from '~/components/profile/current-user/infoPage/MainInfo'
+import ProfileCover from '~/components/profile/current-user/infoPage/Cover'
+import ProfileToolbar from '~/components/profile/current-user/infoPage/Toolbar'
+import ProfileToolbarPageActivity from '~/components/profile/current-user/infoPage/ToolbarPages/Activity'
+import ProfileToolbarPageFriends from '~/components/profile/current-user/infoPage/ToolbarPages/Friends'
+import ProfileToolbarPagePhoto from '~/components/profile/current-user/infoPage/ToolbarPages/Photo'
+import ProfileToolbarPageNews from '~/components/profile/current-user/infoPage/ToolbarPages/News'
 
-  export default {
-    components: { MainInfo, ProfileCover, ProfileToolbar, ProfileToolbarPageActivity, ProfileToolbarPageFriends, ProfileToolbarPagePhoto, ProfileToolbarPageNews },
-    async asyncData ({ params, store, app }) {
-      try {
-        let user, isCurrentUser
+export default {
+  components: { MainInfo, ProfileCover, ProfileToolbar, ProfileToolbarPageActivity, ProfileToolbarPageFriends, ProfileToolbarPagePhoto, ProfileToolbarPageNews },
+  async asyncData ({ params, store, app }) {
+    try {
+      let user, isCurrentUser
 
-        if ((isCurrentUser = app.$auth.loggedIn && app.$auth.user.nickname === params.nickname)) {
-          user = app.$auth.user
-        } else {
-          user = await store.dispatch('otherProfile/getUser', params.nickname)
-        }
-        console.log(user)
-
-        return { user, isCurrentUser }
-      } catch ({ response }) {
-        app.$notify.error(response.data.message)
+      if ((isCurrentUser = app.$auth.loggedIn && app.$auth.user.nickname === params.nickname)) {
+        user = app.$auth.user
+      } else {
+        user = await store.dispatch('otherProfile/getUser', params.nickname)
       }
-    },
-    data: () => ({
-      toolbarCurrentItem: 'tab-Активность',
-      toolbarItems: [
-        {
-          text: 'Активность',
-          component: 'ProfileToolbarPageActivity'
-        },
-        {
-          text: 'Друзья',
-          component: 'ProfileToolbarPageFriends'
-        },
-        {
-          text: 'Фото',
-          component: 'ProfileToolbarPagePhoto'
-        }
-        // 'Видео', 'Музыка'
-      ],
-      toolbarMore: [
-        {
-          text: 'Новости',
-          component: 'ProfileToolbarPageNews'
-        }
-        // , 'Карты', 'Книги', 'Приложения'
-      ],
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    }),
-    methods: {
-      ...mapActions('otherProfile', ['getUser'])
-    },
-    head () {
-      return {
-        title: this.isCurrentUser ? 'Ваш профиль' : 'Прфоиль ' + (this.user ? this.user.nickname : 'не найден!'),
-        meta: [
-          {
-            content: this.isCurrentUser ? 'Информация о Вашем профиле' : (this.user ? 'Информация о профиле ' + this.user.nickname : 'Профиль не найден!'),
-            name: 'description',
-            hid: 'description'
-          }
-        ]
+      console.log(user)
+
+      return { user, isCurrentUser }
+    } catch ({ response }) {
+      app.$notify.error(response.data.message)
+    }
+  },
+  data: () => ({
+    toolbarCurrentItem: 'tab-Активность',
+    toolbarItems: [
+      {
+        text: 'Активность',
+        component: 'ProfileToolbarPageActivity'
+      },
+      {
+        text: 'Друзья',
+        component: 'ProfileToolbarPageFriends'
+      },
+      {
+        text: 'Фото',
+        component: 'ProfileToolbarPagePhoto'
       }
+      // 'Видео', 'Музыка'
+    ],
+    toolbarMore: [
+      {
+        text: 'Новости',
+        component: 'ProfileToolbarPageNews'
+      }
+      // , 'Карты', 'Книги', 'Приложения'
+    ],
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  }),
+  methods: {
+    ...mapActions('otherProfile', ['getUser'])
+  },
+  head () {
+    return {
+      title: this.isCurrentUser ? 'Ваш профиль' : 'Прфоиль ' + (this.user ? this.user.nickname : 'не найден!'),
+      meta: [
+        {
+          content: this.isCurrentUser ? 'Информация о Вашем профиле' : (this.user ? 'Информация о профиле ' + this.user.nickname : 'Профиль не найден!'),
+          name: 'description',
+          hid: 'description'
+        }
+      ]
     }
   }
+}
 </script>
 
 <style>
@@ -131,7 +131,6 @@
     /* top: 130px; /* 230 */
   /* } */
 </style>
-
 
 
 <!-- <v-toolbar color="primary" :class="{'current-user-profile__toolbar': true, 'current-user-profile__toolbar_sticky': $vuetify.breakpoint.mdAndUp }" dark tabs>

@@ -128,74 +128,74 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import { getFlag } from '~/tools/helpers'
-  import validatorMixin from '~/mixins/validator'
-  import MainPhoneSelect from '~/components/profile/current-user/settings/phones/MainPhoneSelect'
+import { mapActions } from 'vuex'
+import { getFlag } from '~/tools/helpers'
+import validatorMixin from '~/mixins/validator'
+import MainPhoneSelect from '~/components/profile/current-user/settings/phones/MainPhoneSelect'
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    mixins: [validatorMixin],
-    components: { MainPhoneSelect },
-    data () {
-      return {
-        mainPhone: this.$auth.user.mainPhone,
-        setMainPhoneLoading: false,
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  mixins: [validatorMixin],
+  components: { MainPhoneSelect },
+  data () {
+    return {
+      mainPhone: this.$auth.user.mainPhone,
+      setMainPhoneLoading: false,
 
-        notifications: true,
-        sound: false,
-        video: false,
-        invites: true,
+      notifications: true,
+      sound: false,
+      video: false,
+      invites: true,
 
-        headers: [
-          {
-            text: 'События',
-            align: 'left',
-            value: 'event'
-          },
-          { text: 'На сайт', value: 'site' },
-          { text: 'На почту', value: 'email' }
-        ],
-        items: [
-          {
-            event: 'Личное сообщение',
-            site: true,
-            email: false,
-            disabled: ['site']
-          },
-          {
-            event: 'Добавление в друзья',
-            site: true,
-            email: true
-          },
-          {
-            event: 'Вас лайкнули',
-            site: false,
-            email: false
-          },
-          {
-            event: 'Подписка',
-            site: false,
-            email: true
-          }
-        ]
-      }
-    },
-    methods: {
-      getFlag,
-      ...mapActions('profileSettings', ['setMainPhone'])
-    },
-    watch: {
-      async mainPhone ({ id }) {
-        if (id === this.$auth.user.mainPhone.id) {
-          return
+      headers: [
+        {
+          text: 'События',
+          align: 'left',
+          value: 'event'
+        },
+        { text: 'На сайт', value: 'site' },
+        { text: 'На почту', value: 'email' }
+      ],
+      items: [
+        {
+          event: 'Личное сообщение',
+          site: true,
+          email: false,
+          disabled: ['site']
+        },
+        {
+          event: 'Добавление в друзья',
+          site: true,
+          email: true
+        },
+        {
+          event: 'Вас лайкнули',
+          site: false,
+          email: false
+        },
+        {
+          event: 'Подписка',
+          site: false,
+          email: true
         }
-        this.setMainPhoneLoading = true
-        await this.setMainPhone({ id })
-        this.mainPhone = this.$auth.user.mainPhone
-        this.setMainPhoneLoading = false
+      ]
+    }
+  },
+  methods: {
+    getFlag,
+    ...mapActions('profileSettings', ['setMainPhone'])
+  },
+  watch: {
+    async mainPhone ({ id }) {
+      if (id === this.$auth.user.mainPhone.id) {
+        return
       }
+      this.setMainPhoneLoading = true
+      await this.setMainPhone({ id })
+      this.mainPhone = this.$auth.user.mainPhone
+      this.setMainPhoneLoading = false
     }
   }
+}
 </script>

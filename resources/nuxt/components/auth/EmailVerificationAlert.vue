@@ -52,88 +52,88 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  import mixinlayoutElements from '~/mixins/helpers/layoutElements'
-  import EmailVerificationAlertContent from '~/components/auth/EmailVerificationAlertContent'
+import { mapGetters } from 'vuex'
+import mixinlayoutElements from '~/mixins/helpers/layoutElements'
+import EmailVerificationAlertContent from '~/components/auth/EmailVerificationAlertContent'
 
-  export default {
-    mixins: [mixinlayoutElements],
-    components: { EmailVerificationAlertContent },
-    props: {
-      underToolbar: Boolean
-    },
-    data: () => ({
-      underToolbarShowMiniMessage: true
-    }),
-    // methods: {
-    //   setTopProperyByAppToolbarHeight () {
-    //     const toolbar = document.querySelector('.email-verification-alert_under-toolbar')
-    //     const el = document.querySelector('.app-toolbar')
-    //     if (el && toolbar) {
-    //       toolbar.style.top = `${el.offsetHeight}px`
+export default {
+  mixins: [mixinlayoutElements],
+  components: { EmailVerificationAlertContent },
+  props: {
+    underToolbar: Boolean
+  },
+  data: () => ({
+    underToolbarShowMiniMessage: true
+  }),
+  // methods: {
+  //   setTopProperyByAppToolbarHeight () {
+  //     const toolbar = document.querySelector('.email-verification-alert_under-toolbar')
+  //     const el = document.querySelector('.app-toolbar')
+  //     if (el && toolbar) {
+  //       toolbar.style.top = `${el.offsetHeight}px`
+  //     }
+  //   }
+  // },
+  computed: {
+    // alertType () {
+    //   if (this.$auth.user.mainEmail) {
+    //     if (!this.$auth.user.mainEmail.verified) {
+    //       return this.$auth.user.activated ? 'info' : 'warning'
     //     }
+    //   } else {
+    //     return 'info'
     //   }
     // },
-    computed: {
-      // alertType () {
-      //   if (this.$auth.user.mainEmail) {
-      //     if (!this.$auth.user.mainEmail.verified) {
-      //       return this.$auth.user.activated ? 'info' : 'warning'
-      //     }
-      //   } else {
-      //     return 'info'
-      //   }
-      // },
-      getInfoByUserData () {
-        return infoType => {
-          const infoText = {
-            noActivated: ['warning', 'У Вас не активирован аккаунт!', 0],
-            noEmailVerified: this.$auth.user.mainEmail ? ['info', `У Вас не подтверждена почта ${this.$auth.user.mainEmail.email}.`, 1] : null,
-            noEmail: ['info', 'В вашем аккаунте нет почты.', 2]
-          }
-          let index
-
-          if (infoType === 'alertType') {
-            index = 0
-          } else if (infoType === 'title') {
-            index = 1
-          } else if (infoType === 'contentType') {
-            index = 2
-          } else {
-            throw new Error('Неизвестный тип')
-          }
-
-          if (this.$auth.user.mainEmail) {
-            if (!this.$auth.user.mainEmail.verified) {
-              return this.$auth.user.activated ? infoText.noEmailVerified[index] : infoText.noActivated[index]
-            }
-          } else {
-            return infoText.noEmail[index]
-          }
+    getInfoByUserData () {
+      return infoType => {
+        const infoText = {
+          noActivated: ['warning', 'У Вас не активирован аккаунт!', 0],
+          noEmailVerified: this.$auth.user.mainEmail ? ['info', `У Вас не подтверждена почта ${this.$auth.user.mainEmail.email}.`, 1] : null,
+          noEmail: ['info', 'В вашем аккаунте нет почты.', 2]
         }
-      },
-      ...mapGetters('user', ['userHaveGlobalMessage'])
-      // ...mapGetters('user', ['userNeedActivateAccountOrVerifyEmail'])
-    },
-    mounted () {
-      this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
+        let index
 
-      window.addEventListener('resize', this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop)
-    },
-    updated () { // по идее когда меняешь код то делается ре-рендеринг
-      this.$nextTick(() => {
-        this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
-      })
-    },
-    watch: {
-      '$route': function () {
-        this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
+        if (infoType === 'alertType') {
+          index = 0
+        } else if (infoType === 'title') {
+          index = 1
+        } else if (infoType === 'contentType') {
+          index = 2
+        } else {
+          throw new Error('Неизвестный тип')
+        }
+
+        if (this.$auth.user.mainEmail) {
+          if (!this.$auth.user.mainEmail.verified) {
+            return this.$auth.user.activated ? infoText.noEmailVerified[index] : infoText.noActivated[index]
+          }
+        } else {
+          return infoText.noEmail[index]
+        }
       }
     },
-    beforeDestroy () {
-      window.removeEventListener('resize', this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop)
+    ...mapGetters('user', ['userHaveGlobalMessage'])
+    // ...mapGetters('user', ['userNeedActivateAccountOrVerifyEmail'])
+  },
+  mounted () {
+    this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
+
+    window.addEventListener('resize', this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop)
+  },
+  updated () { // по идее когда меняешь код то делается ре-рендеринг
+    this.$nextTick(() => {
+      this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
+    })
+  },
+  watch: {
+    '$route': function () {
+      this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop()
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.mixinslayoutElements_emailVerificationAlertUnderToolbarSetTop)
   }
+}
 </script>
 
 <style>

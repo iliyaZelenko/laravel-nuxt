@@ -8,7 +8,6 @@
     <div style="overflow-y: auto;">
       <template v-if="contentType === 2">
 
-
         <img src="~/assets/auth/noEmail.svg" width="100%" style="max-width: 70px; float: right; margin-left: 20px;" alt="Нет почты">
 
         {{ title }}
@@ -16,11 +15,9 @@
         Например: "Забыли пароль?", вход через почту используя пароль, уведомления с раздела "На почту".<br>
         Вы можете ввести ее в <router-link to="/profile/settings/emails">Вашем профиле</router-link>.
 
-
       </template>
       <template v-if="contentType === 0 || contentType === 1">
         <template v-if="contentType === 1">
-
 
             <img src="~/assets/auth/email.svg" width="100%" style="max-width: 70px; float: right; margin-left: 20px;" alt="Почта">
 
@@ -30,7 +27,7 @@
               У вас есть
               {{ otherVerifiedEmails.length === 1 ? 'подтвержденный адрес' : 'подтвержденные адреса:' }}
 
-              <span v-for="email in otherVerifiedEmails">
+              <span v-for="email in otherVerifiedEmails" :key="email">
                 <b>{{ email.email }}</b>
                 <span v-if="email.label">({{ email.label }})</span>,
               </span>
@@ -46,10 +43,8 @@
             Функции сайта требующие почты для Вас не доступны.
             Чтобы подтвердить - посмотрите сообщение на почте которое мы Вам отправляли.
 
-
         </template>
         <template v-if="contentType === 0">
-
 
           <img src="~/assets/auth/notActivated.svg" width="100%" style="max-width: 70px; float: right; margin-left: 20px;" alt="Не активирован">
 
@@ -77,7 +72,6 @@
               </router-link>
             </li>
           </ul>
-
 
         </template>
       </template>

@@ -25,27 +25,27 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { mapActions } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
-  export default {
-    components: { FontAwesomeIcon },
-    data: () => ({
-      socAccounts: null,
-      // provider оне не хотело менять(хотел сделать свойство loading)
-      btnIndexForLoading: null
-    }),
-    methods: {
-      async click (name, index) {
-        this.btnIndexForLoading = index
-        location.href = await this.getRedirectUrl(name)
-        this.btnIndexForLoading = null
-      },
-      ...mapActions(['getSocialiteProviders']),
-      ...mapActions('authSocialite', ['getRedirectUrl'])
+export default {
+  components: { FontAwesomeIcon },
+  data: () => ({
+    socAccounts: null,
+    // provider оне не хотело менять(хотел сделать свойство loading)
+    btnIndexForLoading: null
+  }),
+  methods: {
+    async click (name, index) {
+      this.btnIndexForLoading = index
+      location.href = await this.getRedirectUrl(name)
+      this.btnIndexForLoading = null
     },
-    async beforeMount () {
-      this.socAccounts = await this.getSocialiteProviders()
-    }
+    ...mapActions(['getSocialiteProviders']),
+    ...mapActions('authSocialite', ['getRedirectUrl'])
+  },
+  async beforeMount () {
+    this.socAccounts = await this.getSocialiteProviders()
   }
+}
 </script>

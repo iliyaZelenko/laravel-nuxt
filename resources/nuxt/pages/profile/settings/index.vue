@@ -229,148 +229,148 @@
 </template>
 
 <script>
-  import { getFlag, getLocale } from '~/tools/helpers'
-  import validatorLocales from '~/i18n/validator'
-  import validatorMixin from '~/mixins/validator'
-  import { mapActions } from 'vuex'
-  import Avatar from '~/components/profile/current-user/settings/index/Avatar'
-  import reduce from 'lodash/reduce'
-  import isEqual from 'lodash/isEqual'
+import { getFlag, getLocale } from '~/tools/helpers'
+import validatorLocales from '~/i18n/validator'
+import validatorMixin from '~/mixins/validator'
+import { mapActions } from 'vuex'
+import Avatar from '~/components/profile/current-user/settings/index/Avatar'
+import reduce from 'lodash/reduce'
+import isEqual from 'lodash/isEqual'
 
-  let formDefault
+let formDefault
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    mixins: [validatorMixin],
-    components: { Avatar },
-    async asyncData ({ store }) {
-      return {
-        timezones: await store.dispatch('getTimezones'),
-        countries: await store.dispatch('getCountries')
-      }
-    },
-    data () {
-      const locale = getLocale()
-      const { firstName, lastName, gender, country, timezone, birthday } = this.$auth.user
-      const dateFormat = process.env.dateFormats.main
-
-      formDefault = {
-        firstName,
-        lastName,
-        gender,
-        country,
-        timezone,
-        birthday: birthday ? this.$dayjs(birthday).format(dateFormat) : null
-      }
-
-      return {
-        form: {...formDefault},
-        formLocalizedAttributes: validatorLocales[locale].attributes,
-        modalBirthday: null,
-        loading: false,
-        // dateFormat: process.env.dateFormats.main,
-        currentDate: null,
-        dateFormat,
-        locale
-      }
-    },
-    methods: {
-      async submit () {
-        if (await this.validateByMixin(this.form)) {
-          this.loading = true
-          await this.setUserData(this.form)
-          this.loading = false
-          formDefault = {...this.form}
-        }
-      },
-      formDifference () {
-        return reduce(this.form, (result, value, key) =>
-          isEqual(value, formDefault[key]) ? result : result.concat(key),
-        [])
-      },
-      setCurrentDate () {
-        this.currentDate = this.$dayjs()
-      },
-      timezonesFilter (i, queryText) {
-        return `(UTC${i.offset}) ${i.value} ${this.timezoneCurrentTime(i)}`.includes(queryText)
-      },
-      // birthdayFormatDate (date) {
-      //   if (!date) return null
-      //
-      //   const [year, month, day] = date.split('-')
-      //   return `${month}/${day}/${year}`
-      // },
-      getFlag,
-      ...mapActions('profileSettings', [
-        'setUserData'
-      ])
-    },
-    // watch: {
-    //   'form.timezone' (val) {
-    //     if (val.includes('GMT')) {
-    //       console.log(val)
-    //       this.form.timezone = val.slice(13)
-    //     }
-    //   }
-    // },
-    computed: {
-      timezoneCurrentTime () {
-        return item => {
-          const hours = +item.offset.slice(1, 3)
-          const minutes = +item.offset.slice(4, 6)
-          let date = this.currentDate
-
-          if (item.offsetPrefix === '+') {
-            date = date.add(hours, 'hours').add(minutes, 'minutes')
-          } else {
-            date = date.subtract(hours, 'hours').subtract(minutes, 'minutes')
-          }
-
-          return date.toISOString().slice(11, -5)
-        }
-      },
-      timezonesByCountry () {
-        if (this.form.country) {
-          const countryCode = this.form.country
-          const timezones = this.timezones.filter(i => i.countryCode === countryCode)
-
-          console.log(timezones)
-          if (timezones.length === 1) {
-            this.form.timezone = timezones[0].value
-          }
-
-          return timezones
-        }
-        return this.timezones
-      },
-      // computedBirthday () {
-      //   return this.birthdayFormatDate(this.form)
-      // },
-      // emailErrors () {
-      //   let emailErrors = this.errors.collect('email')
-      //
-      //   if (this.$auth.user.email && this.form.email === '') {
-      //     emailErrors.push('Нельзя удалять почту с аккаунта.')
-      //   }
-      //
-      //   return emailErrors
-      // },
-      // formErrors () {
-      //   return this.errors.items // [...this.errors.items, ...this.emailErrors]
-      // },
-      btnDisabled () {
-        return !!this.errors.items.length
-      }
-    },
-    created () {
-      this.setCurrentDate()
-      setInterval(this.setCurrentDate, 1000)
-    },
-    destroyed () {
-      clearInterval(this.setCurrentDate)
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  mixins: [validatorMixin],
+  components: { Avatar },
+  async asyncData ({ store }) {
+    return {
+      timezones: await store.dispatch('getTimezones'),
+      countries: await store.dispatch('getCountries')
     }
+  },
+  data () {
+    const locale = getLocale()
+    const { firstName, lastName, gender, country, timezone, birthday } = this.$auth.user
+    const dateFormat = process.env.dateFormats.main
+
+    formDefault = {
+      firstName,
+      lastName,
+      gender,
+      country,
+      timezone,
+      birthday: birthday ? this.$dayjs(birthday).format(dateFormat) : null
+    }
+
+    return {
+      form: {...formDefault},
+      formLocalizedAttributes: validatorLocales[locale].attributes,
+      modalBirthday: null,
+      loading: false,
+      // dateFormat: process.env.dateFormats.main,
+      currentDate: null,
+      dateFormat,
+      locale
+    }
+  },
+  methods: {
+    async submit () {
+      if (await this.validateByMixin(this.form)) {
+        this.loading = true
+        await this.setUserData(this.form)
+        this.loading = false
+        formDefault = {...this.form}
+      }
+    },
+    formDifference () {
+      return reduce(this.form, (result, value, key) =>
+        isEqual(value, formDefault[key]) ? result : result.concat(key),
+      [])
+    },
+    setCurrentDate () {
+      this.currentDate = this.$dayjs()
+    },
+    timezonesFilter (i, queryText) {
+      return `(UTC${i.offset}) ${i.value} ${this.timezoneCurrentTime(i)}`.includes(queryText)
+    },
+    // birthdayFormatDate (date) {
+    //   if (!date) return null
+    //
+    //   const [year, month, day] = date.split('-')
+    //   return `${month}/${day}/${year}`
+    // },
+    getFlag,
+    ...mapActions('profileSettings', [
+      'setUserData'
+    ])
+  },
+  // watch: {
+  //   'form.timezone' (val) {
+  //     if (val.includes('GMT')) {
+  //       console.log(val)
+  //       this.form.timezone = val.slice(13)
+  //     }
+  //   }
+  // },
+  computed: {
+    timezoneCurrentTime () {
+      return item => {
+        const hours = +item.offset.slice(1, 3)
+        const minutes = +item.offset.slice(4, 6)
+        let date = this.currentDate
+
+        if (item.offsetPrefix === '+') {
+          date = date.add(hours, 'hours').add(minutes, 'minutes')
+        } else {
+          date = date.subtract(hours, 'hours').subtract(minutes, 'minutes')
+        }
+
+        return date.toISOString().slice(11, -5)
+      }
+    },
+    timezonesByCountry () {
+      if (this.form.country) {
+        const countryCode = this.form.country
+        const timezones = this.timezones.filter(i => i.countryCode === countryCode)
+
+        console.log(timezones)
+        if (timezones.length === 1) {
+          this.form.timezone = timezones[0].value
+        }
+
+        return timezones
+      }
+      return this.timezones
+    },
+    // computedBirthday () {
+    //   return this.birthdayFormatDate(this.form)
+    // },
+    // emailErrors () {
+    //   let emailErrors = this.errors.collect('email')
+    //
+    //   if (this.$auth.user.email && this.form.email === '') {
+    //     emailErrors.push('Нельзя удалять почту с аккаунта.')
+    //   }
+    //
+    //   return emailErrors
+    // },
+    // formErrors () {
+    //   return this.errors.items // [...this.errors.items, ...this.emailErrors]
+    // },
+    btnDisabled () {
+      return !!this.errors.items.length
+    }
+  },
+  created () {
+    this.setCurrentDate()
+    setInterval(this.setCurrentDate, 1000)
+  },
+  destroyed () {
+    clearInterval(this.setCurrentDate)
   }
+}
 </script>
 
 <style>

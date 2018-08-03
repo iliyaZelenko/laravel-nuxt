@@ -22,7 +22,10 @@
           <v-icon slot="activator" color="success">check_circle</v-icon>
           <span>Подтвержденный адрес</span>
         </v-tooltip>
-        <v-tooltip v-else bottom>
+        <v-tooltip
+          v-else
+          bottom
+        >
           <v-icon slot="activator" color="error">error</v-icon>
           <span>Неподтвержденный адрес</span>
         </v-tooltip>
@@ -51,33 +54,33 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import { getFlag } from '~/tools/helpers'
+import { mapActions } from 'vuex'
+import { getFlag } from '~/tools/helpers'
 
-  export default {
-    data () {
-      return {
-        mainPhone: this.$auth.user.mainPhone,
-        setMainPhoneLoading: false
-      }
-    },
-    methods: {
-      getFlag,
-      ...mapActions('profileSettings', ['setMainPhone'])
-    },
-    watch: {
-      async mainPhone ({ id }) {
-        if (this.$auth.user.mainPhone && id === this.$auth.user.mainPhone.id) {
-          return
-        }
-        this.setMainPhoneLoading = true
-        await this.setMainPhone({ id })
-        this.mainPhone = this.$auth.user.mainPhone
-        this.setMainPhoneLoading = false
-      },
-      '$auth.user.phones' () {
-        this.mainPhone = this.$auth.user.mainPhone
-      }
+export default {
+  data () {
+    return {
+      mainPhone: this.$auth.user.mainPhone,
+      setMainPhoneLoading: false
     }
+  },
+  watch: {
+    async mainPhone ({ id }) {
+      if (this.$auth.user.mainPhone && id === this.$auth.user.mainPhone.id) {
+        return
+      }
+      this.setMainPhoneLoading = true
+      await this.setMainPhone({ id })
+      this.mainPhone = this.$auth.user.mainPhone
+      this.setMainPhoneLoading = false
+    },
+    '$auth.user.phones' () {
+      this.mainPhone = this.$auth.user.mainPhone
+    }
+  },
+  methods: {
+    getFlag,
+    ...mapActions('profileSettings', ['setMainPhone'])
   }
+}
 </script>

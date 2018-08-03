@@ -24,28 +24,27 @@
 
     <soc-accounts />
 
-
       <!-- </v-flex>
     </v-layout> -->
   </div>
 </template>
 
 <script>
-  import socAccounts from '~/components/profile/current-user/settings/soc-accounts/SocAccounts'
+import socAccounts from '~/components/profile/current-user/settings/soc-accounts/SocAccounts'
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    components: { socAccounts },
-    computed: {
-      addOrVerifyEmailText () {
-        if (!this.$auth.user.mainEmail) {
-          return 'добавить и подтвердить почту'
-        }
-        if (!this.$auth.user.mainEmail.verified) {
-          return 'подтвердить почту'
-        }
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  components: { socAccounts },
+  computed: {
+    addOrVerifyEmailText () {
+      if (!this.$auth.user.mainEmail) {
+        return 'добавить и подтвердить почту'
+      }
+      if (!this.$auth.user.mainEmail.verified) {
+        return 'подтвердить почту'
       }
     }
   }
+}
 </script>

@@ -17,18 +17,34 @@
 
 module.exports = {
   root: true,
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  plugins: ['vue'],
   env: {
+    browser: true,
     node: true
   },
-  'extends': [
-    'plugin:vue/strongly-recommended',
-    '@vue/standard'
-  ],
+  // extends: [
+  //     "standard",
+  //     "plugin:vue/recommended"
+  // ],
+  extends: ['plugin:vue/essential', 'standard'],
+  // 'extends': [
+    // 'plugin:vue/strongly-recommended', // strongly-recommended
+    // 'standard',
+    // '@vue/standard'
+  // ],
+  // 'plugins': [
+  //   'vue'
+  // ],
+  // "overrides": [
+  //   {
+  //     "files": ["*.js", "*.vue"],
+  //   }
+  // ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
-  parserOptions: {
-    parser: 'babel-eslint'
   }
 }

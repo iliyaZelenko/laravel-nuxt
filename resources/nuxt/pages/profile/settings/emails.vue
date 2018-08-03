@@ -251,85 +251,85 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import validatorMixin from '~/mixins/validator'
+import { mapActions } from 'vuex'
+import validatorMixin from '~/mixins/validator'
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    mixins: [validatorMixin],
-    data () {
-      return {
-        repeatVerificationMailLoadingItemId: false,
-        deleteDialogItem: null,
-        deleteDialog: false,
-        deleteDialogLoadingBtn: false,
-        createDialog: false,
-        createDialogLoadingBtn: false,
-        createDialogForm: {
-          email: null,
-          label: null,
-          public: false,
-          main: !this.$auth.user.emails.length // если нет почт, то будет true
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  mixins: [validatorMixin],
+  data () {
+    return {
+      repeatVerificationMailLoadingItemId: false,
+      deleteDialogItem: null,
+      deleteDialog: false,
+      deleteDialogLoadingBtn: false,
+      createDialog: false,
+      createDialogLoadingBtn: false,
+      createDialogForm: {
+        email: null,
+        label: null,
+        public: false,
+        main: !this.$auth.user.emails.length // если нет почт, то будет true
+      },
+      mainEmail: this.$auth.user.mainEmail,
+      setMainEmailLoading: false,
+      headers: [
+        {
+          text: 'Адрес',
+          align: 'left',
+          value: 'email'
         },
-        mainEmail: this.$auth.user.mainEmail,
-        setMainEmailLoading: false,
-        headers: [
-          {
-            text: 'Адрес',
-            align: 'left',
-            value: 'email'
-          },
-          { text: 'Метка', value: 'label' },
-          { text: 'Подтвержденный', value: 'verified', align: 'center' },
-          { text: 'Виден всем?', value: 'public' },
-          { text: 'Отправлялось сообщение для подтверждения?', value: 'verificationToken', align: 'center' },
-          { text: 'Удалить', value: -1 }
-        ]
-      }
-    },
-    methods: {
-      async createDialogSaveEmail () {
-        if (await this.validateByMixin(this.createDialogForm)) {
-          this.createDialogLoadingBtn = true
-          await this.saveEmail(this.createDialogForm)
-          this.setInputMainEmail()
-          this.createDialogLoadingBtn = this.createDialog = false
-          this.setCreateDialogFormMain()
-        }
-      },
-      async deleteDialogDeleteEmail () {
-        this.deleteDialogLoadingBtn = true
-        await this.deleteEmail({ id: this.deleteDialogItem })
-        this.deleteDialogLoadingBtn = this.deleteDialog = false
-        this.setCreateDialogFormMain()
-      },
-      async clickRepeatVerificationMail (id) {
-        this.repeatVerificationMailLoadingItemId = id
-        await this.repeatVerificationMail(id)
-        this.repeatVerificationMailLoadingItemId = null
-      },
-      setCreateDialogFormMain () { // указывает будет ли в форме чекбокс "сделать главной почтой" true или false
-        this.createDialogForm.main = !this.$auth.user.emails.length
-      },
-      setInputMainEmail () { // применяет новое значение к инпуту
-        this.mainEmail = this.$auth.user.mainEmail
-      },
-      ...mapActions('auth', ['repeatVerificationMail']),
-      ...mapActions('profileSettings', ['saveEmail', 'deleteEmail', 'setMainEmail', 'changePublicStateEmail'])
-    },
-    watch: {
-      async mainEmail ({ id }) {
-        if (this.$auth.user.mainEmail && id === this.$auth.user.mainEmail.id) {
-          return
-        }
-        this.setMainEmailLoading = true
-        await this.setMainEmail({ id })
+        { text: 'Метка', value: 'label' },
+        { text: 'Подтвержденный', value: 'verified', align: 'center' },
+        { text: 'Виден всем?', value: 'public' },
+        { text: 'Отправлялось сообщение для подтверждения?', value: 'verificationToken', align: 'center' },
+        { text: 'Удалить', value: -1 }
+      ]
+    }
+  },
+  methods: {
+    async createDialogSaveEmail () {
+      if (await this.validateByMixin(this.createDialogForm)) {
+        this.createDialogLoadingBtn = true
+        await this.saveEmail(this.createDialogForm)
         this.setInputMainEmail()
-        this.setMainEmailLoading = false
+        this.createDialogLoadingBtn = this.createDialog = false
+        this.setCreateDialogFormMain()
       }
+    },
+    async deleteDialogDeleteEmail () {
+      this.deleteDialogLoadingBtn = true
+      await this.deleteEmail({ id: this.deleteDialogItem })
+      this.deleteDialogLoadingBtn = this.deleteDialog = false
+      this.setCreateDialogFormMain()
+    },
+    async clickRepeatVerificationMail (id) {
+      this.repeatVerificationMailLoadingItemId = id
+      await this.repeatVerificationMail(id)
+      this.repeatVerificationMailLoadingItemId = null
+    },
+    setCreateDialogFormMain () { // указывает будет ли в форме чекбокс "сделать главной почтой" true или false
+      this.createDialogForm.main = !this.$auth.user.emails.length
+    },
+    setInputMainEmail () { // применяет новое значение к инпуту
+      this.mainEmail = this.$auth.user.mainEmail
+    },
+    ...mapActions('auth', ['repeatVerificationMail']),
+    ...mapActions('profileSettings', ['saveEmail', 'deleteEmail', 'setMainEmail', 'changePublicStateEmail'])
+  },
+  watch: {
+    async mainEmail ({ id }) {
+      if (this.$auth.user.mainEmail && id === this.$auth.user.mainEmail.id) {
+        return
+      }
+      this.setMainEmailLoading = true
+      await this.setMainEmail({ id })
+      this.setInputMainEmail()
+      this.setMainEmailLoading = false
     }
   }
+}
 </script>
 
 <style>

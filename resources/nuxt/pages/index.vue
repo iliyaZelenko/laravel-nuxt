@@ -125,76 +125,76 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-  import { getFlag, msg } from '~/tools/helpers'
-  import UserAvatar from '~/components/user/UserAvatar'
+import { mapActions } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { getFlag, msg } from '~/tools/helpers'
+import UserAvatar from '~/components/user/UserAvatar'
 
-  export default {
-    components: { FontAwesomeIcon, UserAvatar },
-    async asyncData ({ app, store }) {
-      try {
-        let users = await app.$axios.$post(`/api/users`)
-        let socialiteProviders = await app.store.dispatch('getSocialiteProviders')
+export default {
+  components: { FontAwesomeIcon, UserAvatar },
+  async asyncData ({ app, store }) {
+    try {
+      let users = await app.$axios.$post(`/api/users`)
+      let socialiteProviders = await app.store.dispatch('getSocialiteProviders')
 
-        console.log(socialiteProviders)
+      console.log(socialiteProviders)
 
-        return { users, socialiteProviders }
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    data: () => ({
-      pagination: {
-        rowsPerPage: 100
-      },
-      headers: [
-        {
-          text: 'Аватар',
-          align: 'left',
-          // sortable: false,
-          value: 'id'
-        },
-        { text: 'Откуда', value: 'countryName' },
-        { text: 'Ник', value: 'nickname' },
-        { text: 'Имя', value: 'fullName' },
-        { text: 'Эл. адреса', value: 'emails' },
-        { text: 'Прикрепленные аккаунты', value: 'socAccounts' },
-        { text: 'Телефоны', value: 'phones', align: 'center' },
-        { text: 'Часовой пояс', value: 'timezone', align: 'center' },
-        { text: 'Активирован', value: 'activated' },
-        { text: 'Имеет пароль', value: 'password' },
-        { text: 'Пол', value: 'gender' },
-        { text: 'День рождения', value: 'birthday' },
-        { text: 'Давно не менял пароль?', value: 'passwordLongTimeNotChange' },
-        { text: 'Зарегестрирован', value: 'createdAt' },
-        { text: 'Зарегестрирован через', value: 'createdThroughSocAcc' },
-        { text: 'Последний раз входил через', value: 'signinThroughSocAcc' }
-      ],
-      dateFormat: process.env.dateFormats.main
-    }),
-    methods: {
-      socAccById (id) {
-        // TODO если пользователь откреплял то может не быть
-        return this.socialiteProviders.find(i => i.id === id) // user.socAccounts
-      },
-      async devSigninByUser (userId) {
-        const info = await this.$axios.$post('/api/auth/login-by-id', { userId })
-        this.signinManually(info)
-        msg.success('Вход выполнен.')
-        this.$router.push('/profile/' + info.user.nickname)
-      },
-      ...mapActions('auth', ['signinManually']),
-      getFlag
-    },
-    computed: {
-      userInfo () {
-        const timezone = this.$cookies.get('guest-timezone')
-        const country = this.$cookies.get('guest-country')
-
-        return { timezone, country }
-      },
-      boolToText: () => val => val ? 'Да' : 'Нет'
+      return { users, socialiteProviders }
+    } catch (e) {
+      console.log(e)
     }
+  },
+  data: () => ({
+    pagination: {
+      rowsPerPage: 100
+    },
+    headers: [
+      {
+        text: 'Аватар',
+        align: 'left',
+        // sortable: false,
+        value: 'id'
+      },
+      { text: 'Откуда', value: 'countryName' },
+      { text: 'Ник', value: 'nickname' },
+      { text: 'Имя', value: 'fullName' },
+      { text: 'Эл. адреса', value: 'emails' },
+      { text: 'Прикрепленные аккаунты', value: 'socAccounts' },
+      { text: 'Телефоны', value: 'phones', align: 'center' },
+      { text: 'Часовой пояс', value: 'timezone', align: 'center' },
+      { text: 'Активирован', value: 'activated' },
+      { text: 'Имеет пароль', value: 'password' },
+      { text: 'Пол', value: 'gender' },
+      { text: 'День рождения', value: 'birthday' },
+      { text: 'Давно не менял пароль?', value: 'passwordLongTimeNotChange' },
+      { text: 'Зарегестрирован', value: 'createdAt' },
+      { text: 'Зарегестрирован через', value: 'createdThroughSocAcc' },
+      { text: 'Последний раз входил через', value: 'signinThroughSocAcc' }
+    ],
+    dateFormat: process.env.dateFormats.main
+  }),
+  methods: {
+    socAccById (id) {
+      // TODO если пользователь откреплял то может не быть
+      return this.socialiteProviders.find(i => i.id === id) // user.socAccounts
+    },
+    async devSigninByUser (userId) {
+      const info = await this.$axios.$post('/api/auth/login-by-id', { userId })
+      this.signinManually(info)
+      msg.success('Вход выполнен.')
+      this.$router.push('/profile/' + info.user.nickname)
+    },
+    ...mapActions('auth', ['signinManually']),
+    getFlag
+  },
+  computed: {
+    userInfo () {
+      const timezone = this.$cookies.get('guest-timezone')
+      const country = this.$cookies.get('guest-country')
+
+      return { timezone, country }
+    },
+    boolToText: () => val => val ? 'Да' : 'Нет'
   }
+}
 </script>

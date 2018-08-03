@@ -53,7 +53,6 @@
      </v-menu>
     </v-tabs>
 
-
     <!-- </v-toolbar-items> -->
     <!-- <v-spacer /> -->
     <!-- <div style="max-width: 10%; ">
@@ -70,34 +69,34 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      currentItem: String,
-      items: Array,
-      more: Array
-    },
-    data () {
-      return {
-        currentItemLocal: this.currentItem
-      }
-    },
-    methods: {
-      addItem (item) {
-        const removed = this.items.splice(0, 1)
+export default {
+  props: {
+    currentItem: String,
+    items: Array,
+    more: Array
+  },
+  data () {
+    return {
+      currentItemLocal: this.currentItem
+    }
+  },
+  methods: {
+    addItem (item) {
+      const removed = this.items.splice(0, 1)
 
-        this.items.push(
-          ...this.more.splice(this.more.indexOf(item), 1)
-        )
-        this.more.push(...removed)
-        this.$nextTick(() => { this.currentItemLocal = 'tab-' + item.text })
-      }
-    },
-    watch: {
-      currentItemLocal (val) {
-        this.$emit('update:currentItem', val)
-      }
+      this.items.push(
+        ...this.more.splice(this.more.indexOf(item), 1)
+      )
+      this.more.push(...removed)
+      this.$nextTick(() => { this.currentItemLocal = 'tab-' + item.text })
+    }
+  },
+  watch: {
+    currentItemLocal (val) {
+      this.$emit('update:currentItem', val)
     }
   }
+}
 </script>
 
 <style>

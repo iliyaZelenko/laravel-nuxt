@@ -77,15 +77,15 @@
 </template>
 
 <script>
-  import UserAvatar from '~/components/user/UserAvatar'
+import UserAvatar from '~/components/user/UserAvatar'
 
-  export default {
-    props: {
-      user: Object,
-      isCurrentUser: Boolean
-    },
-    components: { UserAvatar }
-  }
+export default {
+  props: {
+    user: Object,
+    isCurrentUser: Boolean
+  },
+  components: { UserAvatar }
+}
 </script>
 
 <style>

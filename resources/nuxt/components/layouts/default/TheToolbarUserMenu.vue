@@ -45,19 +45,19 @@
 </template>
 
 <script>
-  // import { mapGetters } from 'vuex'
-  import UserAvatar from '~/components/user/UserAvatar'
-  import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
+import UserAvatar from '~/components/user/UserAvatar'
+import { mapGetters } from 'vuex'
 
-  export default {
-    components: { UserAvatar },
-    computed: {
-      ...mapGetters('user', ['userFullName'])
-    }
-    // computed: {
-    //   ...mapGetters('user', ['userAvatar'])
-    // }
+export default {
+  components: { UserAvatar },
+  computed: {
+    ...mapGetters('user', ['userFullName'])
   }
+  // computed: {
+  //   ...mapGetters('user', ['userAvatar'])
+  // }
+}
 </script>
 
 <style scoped>

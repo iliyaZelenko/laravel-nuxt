@@ -11,23 +11,23 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
-  export default {
-    data: () => ({}),
-    methods: {
-      ...mapActions('auth', [
-        'verifyEmail'
-      ])
-    },
-    computed: {
-      token () {
-        return this.$route.query.token
-      }
-    },
-    async mounted () {
-      console.log(this.token)
-      await this.verifyEmail(this.token)
+export default {
+  data: () => ({}),
+  methods: {
+    ...mapActions('auth', [
+      'verifyEmail'
+    ])
+  },
+  computed: {
+    token () {
+      return this.$route.query.token
     }
+  },
+  async mounted () {
+    console.log(this.token)
+    await this.verifyEmail(this.token)
   }
+}
 </script>

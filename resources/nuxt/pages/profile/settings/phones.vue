@@ -58,6 +58,7 @@
           style="max-width: 100%;"
           hide-actions
           disable-initial-sort
+
         >
           <template slot="items" slot-scope="{ item }" active="true">
             <tr>
@@ -225,84 +226,84 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import { getFlag } from '~/tools/helpers'
-  import MainPhoneSelect from '~/components/profile/current-user/settings/phones/MainPhoneSelect'
-  import validatorMixin from '~/mixins/validator'
+import { mapActions } from 'vuex'
+import { getFlag } from '~/tools/helpers'
+import MainPhoneSelect from '~/components/profile/current-user/settings/phones/MainPhoneSelect'
+import validatorMixin from '~/mixins/validator'
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    mixins: [validatorMixin],
-    components: { MainPhoneSelect },
-    asyncData: async ({ store }) => ({
-      prefixes: await store.dispatch('getPhonePrefixes')
-    }),
-    data () {
-      return {
-        repeatVerificationPhoneLoadingItemId: false,
-        deleteDialogItem: null,
-        deleteDialog: false,
-        deleteDialogLoadingBtn: false,
-        createDialog: false,
-        createDialogLoadingBtn: false,
-        createDialogForm: {
-          prefix: null,
-          number: null,
-          label: null,
-          public: false,
-          main: !this.$auth.user.phones.length // если нет телефонов, то будет true
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  mixins: [validatorMixin],
+  components: { MainPhoneSelect },
+  asyncData: async ({ store }) => ({
+    prefixes: await store.dispatch('getPhonePrefixes')
+  }),
+  data () {
+    return {
+      repeatVerificationPhoneLoadingItemId: false,
+      deleteDialogItem: null,
+      deleteDialog: false,
+      deleteDialogLoadingBtn: false,
+      createDialog: false,
+      createDialogLoadingBtn: false,
+      createDialogForm: {
+        prefix: null,
+        number: null,
+        label: null,
+        public: false,
+        main: !this.$auth.user.phones.length // если нет телефонов, то будет true
+      },
+      headers: [
+        {
+          text: 'Номер',
+          align: 'left',
+          value: 'numberFormated'
         },
-        headers: [
-          {
-            text: 'Номер',
-            align: 'left',
-            value: 'numberFormated'
-          },
-          { text: 'Метка', value: 'label' },
-          { text: 'Подтвержденный', value: 'verified', align: 'center' },
-          { text: 'Виден всем?', value: 'public' },
-          { text: 'Отправлялось смс для подтверждения?', value: 'smsVerificationCode', align: 'center' },
-          { text: 'Удалить', value: -1 }
-        ]
+        { text: 'Метка', value: 'label' },
+        { text: 'Подтвержденный', value: 'verified', align: 'center' },
+        { text: 'Виден всем?', value: 'public' },
+        { text: 'Отправлялось смс для подтверждения?', value: 'smsVerificationCode', align: 'center' },
+        { text: 'Удалить', value: -1 }
+      ]
+    }
+  },
+  methods: {
+    async createDialogSavePhone () {
+      if (await this.validateByMixin(this.createDialogForm)) {
+        const prefixMoreInfo = this.prefixes.find(i => i.phonePrefix === this.createDialogForm.prefix)
+        this.createDialogForm.country = prefixMoreInfo.countryCode
+        this.createDialogForm.country2 = prefixMoreInfo.countryCode2
+
+        this.createDialogLoadingBtn = true
+        await this.savePhone(this.createDialogForm)
+        this.createDialogLoadingBtn = this.createDialog = false
+        this.setCreateDialogFormMain()
       }
     },
-    methods: {
-      async createDialogSavePhone () {
-        if (await this.validateByMixin(this.createDialogForm)) {
-          const prefixMoreInfo = this.prefixes.find(i => i.phonePrefix === this.createDialogForm.prefix)
-          this.createDialogForm.country = prefixMoreInfo.countryCode
-          this.createDialogForm.country2 = prefixMoreInfo.countryCode2
-
-          this.createDialogLoadingBtn = true
-          await this.savePhone(this.createDialogForm)
-          this.createDialogLoadingBtn = this.createDialog = false
-          this.setCreateDialogFormMain()
-        }
-      },
-      async deleteDialogDeletePhone () {
-        this.deleteDialogLoadingBtn = true
-        await this.deletePhone({ id: this.deleteDialogItem })
-        this.deleteDialogLoadingBtn = this.deleteDialog = false
-        this.setCreateDialogFormMain()
-      },
-      async clickRepeatVerificationPhone (id) {
-        this.repeatVerificationPhoneLoadingItemId = id
-        await this.repeatVerificationPhone(id)
-        this.repeatVerificationPhoneLoadingItemId = null
-      },
-      setCreateDialogFormMain () { // указывает будет ли в форме чекбокс "сделать главной почтой" true или false и указывает mainEmail
-        this.createDialogForm.main = !this.$auth.user.phones.length
-      },
-      getFlag,
-      ...mapActions(['phonePrefixes']),
-      ...mapActions('profileSettings', ['savePhone', 'deletePhone', 'changePublicStatePhone', 'repeatVerificationPhone'])
+    async deleteDialogDeletePhone () {
+      this.deleteDialogLoadingBtn = true
+      await this.deletePhone({ id: this.deleteDialogItem })
+      this.deleteDialogLoadingBtn = this.deleteDialog = false
+      this.setCreateDialogFormMain()
     },
-    mounted () {
-      // префикс по стране
-      this.createDialogForm.prefix = this.prefixes.find(i => i.countryCode === this.$auth.user.country).phonePrefix
-    }
+    async clickRepeatVerificationPhone (id) {
+      this.repeatVerificationPhoneLoadingItemId = id
+      await this.repeatVerificationPhone(id)
+      this.repeatVerificationPhoneLoadingItemId = null
+    },
+    setCreateDialogFormMain () { // указывает будет ли в форме чекбокс "сделать главной почтой" true или false и указывает mainEmail
+      this.createDialogForm.main = !this.$auth.user.phones.length
+    },
+    getFlag,
+    ...mapActions(['phonePrefixes']),
+    ...mapActions('profileSettings', ['savePhone', 'deletePhone', 'changePublicStatePhone', 'repeatVerificationPhone'])
+  },
+  mounted () {
+    // префикс по стране
+    this.createDialogForm.prefix = this.prefixes.find(i => i.countryCode === this.$auth.user.country).phonePrefix
   }
+}
 </script>
 
 <style>

@@ -103,119 +103,119 @@
 </template>
 
 <script>
-  import Cropper from 'cropperjs'
-  import 'cropperjs/dist/cropper.css'
-  import { msg } from '~/tools/helpers'
-  import UserAvatar from '~/components/user/UserAvatar'
-  // import 'vue-images-manager'
-  // import AppImgLoader from '~/components/AppImgLoader'
-  // import AppImgLoader from 'vue-images-manager'
-  // require('vue-images-manager')
-  // require('/cropperjs/cropper.css')
-  // app-img-loader , vueImagesManager
-  export default {
-    components: { UserAvatar },
-    data: () => ({
-      progress: null,
-      avatarFormData: null,
-      cropperInstance: null,
-      avatarEditorSrc: null,
-      avatarPreviewUrl: null,
-      previewSetTimeoutId: null,
-      manualUploadInfo: null,
-      reset: null
-    }),
-    methods: {
-      onChange (data) {
-        this.avatarFormData = data.formData
+import Cropper from 'cropperjs'
+import 'cropperjs/dist/cropper.css'
+import { msg } from '~/tools/helpers'
+import UserAvatar from '~/components/user/UserAvatar'
+// import 'vue-images-manager'
+// import AppImgLoader from '~/components/AppImgLoader'
+// import AppImgLoader from 'vue-images-manager'
+// require('vue-images-manager')
+// require('/cropperjs/cropper.css')
+// app-img-loader , vueImagesManager
+export default {
+  components: { UserAvatar },
+  data: () => ({
+    progress: null,
+    avatarFormData: null,
+    cropperInstance: null,
+    avatarEditorSrc: null,
+    avatarPreviewUrl: null,
+    previewSetTimeoutId: null,
+    manualUploadInfo: null,
+    reset: null
+  }),
+  methods: {
+    onChange (data) {
+      this.avatarFormData = data.formData
 
-        if (this.cropperInstance) {
-          this.cropperInstance.replace(data.preview)
-        } else {
-          this.avatarEditorSrc = data.preview
-          this.$nextTick(() => {
-            const image = this.$refs.avatarEditor
-            this.cropperInstance = new Cropper(image, {
-              aspectRatio: 1, // 4 / 3,
-              viewMode: 1,
-              // autoCropArea: 1, // default: 0.8
-              // dragMode: 'move',
-              // preview: this.$refs.avatarPreview,
-              zoomable: false,
-              zoomOnTouch: false,
-              zoomOnWheel: false,
-              crop: event => {
-                if (this.previewSetTimeoutId) {
-                  clearTimeout(this.previewSetTimeoutId)
-                }
-                this.previewSetTimeoutId = setTimeout(() => {
-                  this.cropperInstance.getCroppedCanvas({
-                    // используется размер аватарки из конфига
-                    width: process.env.avatarSizes.lg,
-                    height: process.env.avatarSizes.lg
-                  }).toBlob(blob => {
-                    URL.revokeObjectURL(this.avatarPreviewUrl) // очищает с памяти прошлый url
-                    this.avatarPreviewUrl = URL.createObjectURL(blob)
-                    // this.$refs.avatarPreview.setAttribute('src', this.urlPreviewInstance)
-                  })
-                }, 20)
-              }
-            })
-          })
-        }
-      },
-      startManualUpload () {
-        const cropData = JSON.stringify(this.cropperInstance.getData(true))
-
-        this.avatarFormData.append('cropInfo', cropData)
-        this.manualUploadInfo = {
-          formData: this.avatarFormData
-        }
-
-        // let formData = new FormData()
-        // this.cropperInstance.getCroppedCanvas({
-        //   width: 726,
-        //   height: 544
-        // }).toBlob(blob => {
-        //   formData.append('file', blob)
-        //   formData.append('cropInfo', this.cropperInstance.getData(true))
-        //
-        //   this.manualUploadInfo = {
-        //     formData
-        //   }
-        // })
-      },
-      onUploadDone (user) {
-        this.croperDestroy()
-        this.goToNickname()
-        this.$auth.setUser(user)
-      },
-      croperDestroy () {
-        this.cropperInstance = this.progress = this.avatarEditorSrc = this.avatarPreviewUrl = null
-        this.reset = true
-        document.querySelector('.cropper-container').remove()
-        this.goToNickname()
-      },
-      onUploadCatch (response) {
-        msg.error(response.data.message)
-      },
-      onUploadProgress (info) {
-        this.progress = info.percent
-      },
-      goToNickname () {
+      if (this.cropperInstance) {
+        this.cropperInstance.replace(data.preview)
+      } else {
+        this.avatarEditorSrc = data.preview
         this.$nextTick(() => {
-          this.$vuetify.goTo('#profile-settings__nickname')
+          const image = this.$refs.avatarEditor
+          this.cropperInstance = new Cropper(image, {
+            aspectRatio: 1, // 4 / 3,
+            viewMode: 1,
+            // autoCropArea: 1, // default: 0.8
+            // dragMode: 'move',
+            // preview: this.$refs.avatarPreview,
+            zoomable: false,
+            zoomOnTouch: false,
+            zoomOnWheel: false,
+            crop: event => {
+              if (this.previewSetTimeoutId) {
+                clearTimeout(this.previewSetTimeoutId)
+              }
+              this.previewSetTimeoutId = setTimeout(() => {
+                this.cropperInstance.getCroppedCanvas({
+                  // используется размер аватарки из конфига
+                  width: process.env.avatarSizes.lg,
+                  height: process.env.avatarSizes.lg
+                }).toBlob(blob => {
+                  URL.revokeObjectURL(this.avatarPreviewUrl) // очищает с памяти прошлый url
+                  this.avatarPreviewUrl = URL.createObjectURL(blob)
+                  // this.$refs.avatarPreview.setAttribute('src', this.urlPreviewInstance)
+                })
+              }, 20)
+            }
+          })
         })
       }
+    },
+    startManualUpload () {
+      const cropData = JSON.stringify(this.cropperInstance.getData(true))
+
+      this.avatarFormData.append('cropInfo', cropData)
+      this.manualUploadInfo = {
+        formData: this.avatarFormData
+      }
+
+      // let formData = new FormData()
+      // this.cropperInstance.getCroppedCanvas({
+      //   width: 726,
+      //   height: 544
+      // }).toBlob(blob => {
+      //   formData.append('file', blob)
+      //   formData.append('cropInfo', this.cropperInstance.getData(true))
+      //
+      //   this.manualUploadInfo = {
+      //     formData
+      //   }
+      // })
+    },
+    onUploadDone (user) {
+      this.croperDestroy()
+      this.goToNickname()
+      this.$auth.setUser(user)
+    },
+    croperDestroy () {
+      this.cropperInstance = this.progress = this.avatarEditorSrc = this.avatarPreviewUrl = null
+      this.reset = true
+      document.querySelector('.cropper-container').remove()
+      this.goToNickname()
+    },
+    onUploadCatch (response) {
+      msg.error(response.data.message)
+    },
+    onUploadProgress (info) {
+      this.progress = info.percent
+    },
+    goToNickname () {
+      this.$nextTick(() => {
+        this.$vuetify.goTo('#profile-settings__nickname')
+      })
     }
-    // mounted () {
-    //   // new Image();
-    //   this.$refs.avatar.addEventListener('DOMAttrModified', (e) => {
-    //     if (e.attrName === 'src') {
-    //       this.avatarBrowserLoaded = true
-    //       console.log(123)
-    //     }
-    //   })
-    // }
   }
+  // mounted () {
+  //   // new Image();
+  //   this.$refs.avatar.addEventListener('DOMAttrModified', (e) => {
+  //     if (e.attrName === 'src') {
+  //       this.avatarBrowserLoaded = true
+  //       console.log(123)
+  //     }
+  //   })
+  // }
+}
 </script>

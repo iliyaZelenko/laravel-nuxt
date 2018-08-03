@@ -59,32 +59,32 @@
 </template>
 
 <script>
-  import mixinlayoutElements from '~/mixins/helpers/layoutElements'
-  import SettingsMenu from '~/components/profile/current-user/settings/Menu'
-  import SettingsMenuToolbar from '~/components/profile/current-user/settings/MenuToolbar'
-  import SettingsContent from '~/components/profile/current-user/settings/Content'
+import mixinlayoutElements from '~/mixins/helpers/layoutElements'
+import SettingsMenu from '~/components/profile/current-user/settings/Menu'
+import SettingsMenuToolbar from '~/components/profile/current-user/settings/MenuToolbar'
+import SettingsContent from '~/components/profile/current-user/settings/Content'
 
-  export default {
-    middleware: 'auth',
-    mixins: [mixinlayoutElements],
-    components: { SettingsMenu, SettingsMenuToolbar, SettingsContent },
-    data: () => ({}),
-    methods: {
+export default {
+  middleware: 'auth',
+  mixins: [mixinlayoutElements],
+  components: { SettingsMenu, SettingsMenuToolbar, SettingsContent },
+  data: () => ({}),
+  methods: {
 
-    },
-    mounted () {
-      this.$nextTick(this.mixinslayoutElements_profileInterfaceSetStyles)
+  },
+  mounted () {
+    this.$nextTick(this.mixinslayoutElements_profileInterfaceSetStyles)
 
-      // странно как оно работает без bind
-      window.addEventListener('resize', this.mixinslayoutElements_profileInterfaceSetStyles)
-    },
-    // watch: {
-    //   'profileToolbar.style.'
-    // },
-    beforeDestroy () {
-      window.removeEventListener('resize', this.mixinslayoutElements_profileInterfaceSetStyles)
-    }
+    // странно как оно работает без bind
+    window.addEventListener('resize', this.mixinslayoutElements_profileInterfaceSetStyles)
+  },
+  // watch: {
+  //   'profileToolbar.style.'
+  // },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.mixinslayoutElements_profileInterfaceSetStyles)
   }
+}
 </script>
 
 <style>

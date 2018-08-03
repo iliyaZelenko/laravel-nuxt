@@ -55,40 +55,40 @@
 </template>
 
 <script>
-  import validatorMixin from '~/mixins/validator'
-  import { mapActions } from 'vuex'
+import validatorMixin from '~/mixins/validator'
+import { mapActions } from 'vuex'
 
-  export default {
-    mixins: [validatorMixin],
-    data: () => ({
-      form: {
-        password: null
-      },
-      btnLoading: false,
-      passwordShow: true
-    }),
-    methods: {
-      async submit () {
-        if (await this.validateByMixin(this.form)) {
-          const { email, token } = this.$route.params
-
-          this.btnLoading = true
-          await this.resetPassword({
-            password: this.form.password,
-            email,
-            token
-          })
-          this.btnLoading = false
-        }
-      },
-      ...mapActions('auth', [
-        'resetPassword'
-      ])
+export default {
+  mixins: [validatorMixin],
+  data: () => ({
+    form: {
+      password: null
     },
-    computed: {
-      btnDisabled () {
-        return !!this.errors.items.length
+    btnLoading: false,
+    passwordShow: true
+  }),
+  methods: {
+    async submit () {
+      if (await this.validateByMixin(this.form)) {
+        const { email, token } = this.$route.params
+
+        this.btnLoading = true
+        await this.resetPassword({
+          password: this.form.password,
+          email,
+          token
+        })
+        this.btnLoading = false
       }
+    },
+    ...mapActions('auth', [
+      'resetPassword'
+    ])
+  },
+  computed: {
+    btnDisabled () {
+      return !!this.errors.items.length
     }
   }
+}
 </script>

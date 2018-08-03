@@ -1,7 +1,6 @@
 require('dotenv').config()
 const spa = require('laravel-nuxt')
 
-
 const commonConfig = {
   env: {
     // you can access env file via process.env
@@ -139,28 +138,23 @@ const spaModeConfig = spa(commonConfig)
 
 // universa(ssr) config
 const universalModeConfig = {
-    ...commonConfig,
-    mode: 'universal', // (ssr)
-    srcDir: 'resources/nuxt',
-    generate: {
-        dir: 'storage/app/nuxt'
-    },
-    axios: {
-        browserBaseURL: process.env.APP_URL,
-        baseURL: process.env.APP_URL // api url 'http://127.0.0.1:8000'
-    }
+  ...commonConfig,
+  mode: 'universal', // (ssr)
+  srcDir: 'resources/nuxt',
+  generate: {
+    dir: 'storage/app/nuxt'
+  },
+  axios: {
+    browserBaseURL: process.env.APP_URL,
+    baseURL: process.env.APP_URL // api url 'http://127.0.0.1:8000'
+  }
 }
-
 
 if (process.env.APP_CLIENT_MODE === 'ssr') {
-    module.exports = universalModeConfig
+  module.exports = universalModeConfig
 } else {
-    module.exports = spaModeConfig
+  module.exports = spaModeConfig
 }
-
-
-
-
 
 
 

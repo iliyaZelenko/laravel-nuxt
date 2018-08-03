@@ -161,51 +161,51 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import validatorMixin from '~/mixins/validator'
+import { mapActions } from 'vuex'
+import validatorMixin from '~/mixins/validator'
 
-  export default {
-    transition: 'slide-y-transition',
-    scrollToTop: true,
-    mixins: [validatorMixin],
-    asyncData: async ({ store }) => ({
-      passwordsHistory: await store.dispatch('profileSettings/getPasswordsHistory')
-    }),
-    data: () => ({
-      password: null,
-      currentPassword: null,
-      newPassword: null,
-      passwordShow: true,
-      loading: false,
-      dateFormat: process.env.dateFormats.main
-    }),
-    computed: {
-      title () {
-        return this.$auth.user.password ? 'Смена пароля' : 'Добавление пароля'
-      },
-      btnDisabled () {
-        return !!this.errors.items.length
-      }
-      // passwordsHistorySorted () {
-      //   this.passwordsHistory.sort((a, b) => {
-      //     return new Date(b.created_at) - new Date(a.created_at)
-      //   })
-      // }
+export default {
+  transition: 'slide-y-transition',
+  scrollToTop: true,
+  mixins: [validatorMixin],
+  asyncData: async ({ store }) => ({
+    passwordsHistory: await store.dispatch('profileSettings/getPasswordsHistory')
+  }),
+  data: () => ({
+    password: null,
+    currentPassword: null,
+    newPassword: null,
+    passwordShow: true,
+    loading: false,
+    dateFormat: process.env.dateFormats.main
+  }),
+  computed: {
+    title () {
+      return this.$auth.user.password ? 'Смена пароля' : 'Добавление пароля'
     },
-    methods: {
-      async saveNewPassword () {
-        const data = this.$auth.user.password
-          ? { currentPassword: this.currentPassword, newPassword: this.newPassword }
-          : { password: this.password }
-
-        if (await this.validateByMixin(data)) {
-          this.loading = true
-          await this.setPassword(data)
-          this.loading = false
-          this.passwordsHistory = await this.getPasswordsHistory()
-        }
-      },
-      ...mapActions('profileSettings', ['setPassword', 'getPasswordsHistory'])
+    btnDisabled () {
+      return !!this.errors.items.length
     }
+    // passwordsHistorySorted () {
+    //   this.passwordsHistory.sort((a, b) => {
+    //     return new Date(b.created_at) - new Date(a.created_at)
+    //   })
+    // }
+  },
+  methods: {
+    async saveNewPassword () {
+      const data = this.$auth.user.password
+        ? { currentPassword: this.currentPassword, newPassword: this.newPassword }
+        : { password: this.password }
+
+      if (await this.validateByMixin(data)) {
+        this.loading = true
+        await this.setPassword(data)
+        this.loading = false
+        this.passwordsHistory = await this.getPasswordsHistory()
+      }
+    },
+    ...mapActions('profileSettings', ['setPassword', 'getPasswordsHistory'])
   }
+}
 </script>
