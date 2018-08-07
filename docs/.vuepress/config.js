@@ -2,6 +2,7 @@ module.exports = {
   title: 'Laravel Nuxt Auth Starter DEMO',
   description: 'Laravel + Nuxt.js',
   layout: 'SpecialLayout',
+  base: '/laravel-nuxt/',
   // head: [
   //   ['link', { rel: 'icon', href: `/logo.png` }
   // ],

@@ -1,10 +1,15 @@
 .nuxt
+.yalc
 
 /public/_nuxt
 /public/avatars/*
 !/public/avatars/forAdminSeed
 
 Procfile
+
+deploy.sh
+/docs/*
+/docs
 
 /public/hot
 /public/storage
