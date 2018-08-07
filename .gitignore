@@ -1,6 +1,6 @@
 .nuxt
-
-
+.yalc
+yalc.lock
 
 /public/_nuxt
 /public/avatars/*
@@ -9,8 +9,7 @@
 Procfile
 
 deploy.sh
-
-
+/docs
 
 /public/hot
 /public/storage
