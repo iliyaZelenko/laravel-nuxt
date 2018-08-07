@@ -1,9 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "vue-images-manager": {
-      "signature": "4e1ac552e7c1bc9130c5362efd9ba542",
-      "file": true
-    }
-  }
-}
