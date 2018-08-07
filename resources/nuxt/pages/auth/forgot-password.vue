@@ -3,11 +3,9 @@
     <v-layout fill-height justify-center align-center>
       <v-flex xs12 sm8 md6 lg4 xl3>
 
-
         <v-alert :value="sent" type="info">
           Эта страница уже не нужна, перейдите по ссылке в сообщении.
         </v-alert>
-
 
         <v-card v-show="!sent" class="elevation-10 app-border-all-round">
           <v-toolbar card prominent>
@@ -16,7 +14,6 @@
             </v-layout>
           </v-toolbar>
           <v-card-text>
-
 
             <v-btn
               :to="$auth.loggedIn ? '/profile/settings/password' : '/auth/signin'"
@@ -27,7 +24,6 @@
               <v-icon left>arrow_back</v-icon>
               Назад
             </v-btn>
-
 
             <!-- <div class="display-1 text-xs-center mb-3">
               Сброс пароля
@@ -48,7 +44,6 @@
                 </router-link>
               </v-alert>
             </template>
-
 
             <form v-if="!$auth.loggedIn || userCanUseEmail()" @submit.prevent="submit" @keydown.enter="submit" autocomplete="on">
               <v-radio-group v-model="emailOrNickname" v-if="!$auth.loggedIn" row>
@@ -83,10 +78,8 @@
               />
             </form>
 
-
           </v-card-text>
           <v-card-actions v-if="!$auth.loggedIn || userCanUseEmail()" class="px-3 pb-3">
-
 
             <v-btn
               @click="submit"
@@ -99,10 +92,8 @@
               <v-icon right>forward</v-icon>
             </v-btn>
 
-
           </v-card-actions>
         </v-card>
-
 
       </v-flex>
     </v-layout>

@@ -30,10 +30,8 @@
               />
             </form>
 
-
           </v-card-text>
           <v-card-actions class="px-3 pb-3">
-
 
             <v-btn
               @click="submit"
@@ -45,7 +43,6 @@
               <v-icon left>save</v-icon>
               Сохранить
             </v-btn>
-
 
           </v-card-actions>
         </v-card>

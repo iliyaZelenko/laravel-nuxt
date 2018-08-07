@@ -17,7 +17,7 @@
 
           <v-list v-if="$auth.user.socAccounts.length" two-line dense>
             <template v-for="(account, index) in $auth.user.socAccounts">
-              <v-list-tile>
+              <v-list-tile :key="index">
                 <v-list-tile-avatar :style="'color: ' + account.color">
                   <font-awesome-icon :icon="['fab', account.icon]" size="3x" />
                 </v-list-tile-avatar>
@@ -36,11 +36,11 @@
                   </v-btn>
                 </v-list-tile-action>
               </v-list-tile>
-              <small class="grey--text ml-4">
+              <small class="grey--text ml-4" :key="index">
                 Прикреплено {{ account.pivot.created_at | date }}
                 ({{ $dayjs().to($dayjs(account.pivot.created_at)) }})
               </small>
-              <v-divider v-if="index + 1 < $auth.user.socAccounts.length" />
+              <v-divider v-if="index + 1 < $auth.user.socAccounts.length" :key="index" />
             </template>
           </v-list>
 
@@ -60,7 +60,7 @@
           <v-list v-if="notUsedSocAccount.length" two-line dense>
             <!-- :key="account.id" -->
             <template v-for="(account, index) in notUsedSocAccount">
-              <v-list-tile>
+              <v-list-tile :key="index">
                 <v-list-tile-avatar :style="'color: ' + account.color">
                   <font-awesome-icon :icon="['fab', account.icon]" size="3x" />
                 </v-list-tile-avatar>
@@ -79,7 +79,7 @@
                   </v-btn>
                 </v-list-tile-action>
               </v-list-tile>
-              <v-divider v-if="index + 1 < notUsedSocAccount.length" />
+              <v-divider v-if="index + 1 < notUsedSocAccount.length"  :key="index" />
             </template>
           </v-list>
 

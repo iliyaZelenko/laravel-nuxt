@@ -47,19 +47,19 @@
               <v-icon>arrow_drop_down</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile @click="">
+              <v-list-tile @click="() => {}">
                 <v-list-tile-title>
                   <v-icon class="mr-2">person_add</v-icon>
                   Добавить в друзья
                 </v-list-tile-title>
               </v-list-tile>
-              <v-list-tile @click="">
+              <v-list-tile @click="() => {}">
                 <v-list-tile-title>
                   <v-icon class="mr-2">block</v-icon>
                   Заблокировать
                 </v-list-tile-title>
               </v-list-tile>
-              <v-list-tile @click="">
+              <v-list-tile @click="() => {}">
                 <v-list-tile-title>
                   <v-icon class="mr-2">chat</v-icon>
                   Написать сообщение

@@ -121,7 +121,7 @@
           Вы не меняли пароль.
         </v-alert>
         <ul>
-          <li v-for="period in passwordsHistory.slice().reverse()">
+          <li v-for="period in passwordsHistory.slice().reverse()" :key="period.id">
             <time>
               {{ $dayjs(period.created_at).format(dateFormat) }}
               ({{ $dayjs().to($dayjs(period.created_at)) }})

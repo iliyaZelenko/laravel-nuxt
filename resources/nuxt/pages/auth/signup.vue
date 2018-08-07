@@ -5,7 +5,6 @@
       <v-flex xs12 sm8 md6 lg4 xl3>
         <v-card class="elevation-10 app-border-all-round">
 
-
           <v-toolbar card prominent>
             <v-layout class="display-1" justify-center>
                 Регистрация
@@ -13,9 +12,7 @@
           </v-toolbar>
           <v-card-text>
 
-
             <socialite-buttons />
-
 
             <app-hr-text text="или" />
 
@@ -36,9 +33,7 @@
               <!-- <div class="g-recaptcha" data-sitekey="6LdxzGAUAAAAAB-7jgghBCMhn4NPYJzcHLtV2QMN"></div> -->
             </form>
 
-
           </v-card-text>
-
 
           <div class="text-xs-center pb-3">
             <v-icon class="mr-1">directions_walk</v-icon>
@@ -47,11 +42,9 @@
             </nuxt-link>
           </div>
 
-
         </v-card>
       </v-flex>
     </v-layout>
-
 
     <!-- <no-ssr>
       <script :src="`https://www.google.com/recaptcha/api.js?render=${captchaKey}`"></script>

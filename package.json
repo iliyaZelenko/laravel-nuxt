@@ -1,17 +1,21 @@
 {
-  "name": "nuxt_vuetify",
+  "name": "nuxt_laravel",
   "version": "1.0.0",
-  "description": "Nuxt.js + Vuetify.js project",
+  "description": "Nuxt.js + Laravel project",
   "author": "Ilya Zelenko <iliyazelenkog@gmail.com>",
   "private": true,
   "scripts": {
     "start": "nuxt start",
     "ssr": "nuxt build && nuxt start",
     "dev": "laravel-nuxt dev",
+    "dev2": "nuxt",
     "build-spa": "laravel-nuxt build",
     "build-ssr": "nuxt build",
     "analysis": "laravel-nuxt build -a",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
@@ -27,6 +31,7 @@
     "lodash": "^4.17.10",
     "nuxt": "^1.4.0",
     "vee-validate": "^2.0.9",
+    "vue-images-manager": "file:.yalc/vue-images-manager",
     "vue-izitoast": "^1.1.0",
     "vue-notifications": "^0.9.0",
     "vuetify": "^1.0.18",
@@ -34,7 +39,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
+    "eslint": "^4.2.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.1.1",

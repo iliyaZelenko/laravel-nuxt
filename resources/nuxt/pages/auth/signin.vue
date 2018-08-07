@@ -13,14 +13,11 @@
               Вход
             </div> -->
 
-
             <v-alert type="error" :value="$auth.$state.redirect">
               Чтобы посетить <b>{{ $auth.$state.redirect }}</b> Вам нужно войти.
             </v-alert>
 
-
             <socialite-buttons />
-
 
             <app-hr-text text="или" />
 
@@ -28,7 +25,6 @@
               {{ error }}
             </v-alert> -->
             <!-- <v-btn @click="google">Google</v-btn> -->
-
 
             <form @submit.prevent="submit" @keydown.enter="submit" autocomplete="on">
               <!-- <v-layout align-center justify-center> -->
@@ -39,7 +35,6 @@
                   </v-layout>
                 </v-radio-group>
               <!-- </v-layout> -->
-
 
               <v-text-field
                 v-show="emailOrNickname === 'email'"
@@ -54,7 +49,6 @@
                 box
               />
 
-
               <v-text-field
                 v-show="emailOrNickname === 'nickname'"
                 v-model="form.nickname"
@@ -67,7 +61,6 @@
                 required
                 box
               />
-
 
               <v-text-field
                 v-model="form.password"
@@ -83,7 +76,6 @@
                 box
               />
 
-
               <!-- <v-checkbox
                 v-model="form.remember"
                 label="Запомнить меня"
@@ -91,17 +83,11 @@
               ></v-checkbox> -->
             </form>
 
-
           </v-card-text>
           <v-card-actions class="px-3 pb-3">
 
             <!-- class="ml-3" -->
-
-
             <!-- <v-spacer /> -->
-
-
-
 
             <v-btn
               @click="submit"
@@ -131,9 +117,6 @@
           </div>
 
         </v-card>
-
-
-
 
       </v-flex>
     </v-layout>

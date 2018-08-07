@@ -4,7 +4,6 @@
     'application--have-settings-background': $route.path.includes('profile/settings')
   }">
 
-
     <!-- <v-navigation-drawer
       :mini-variant.sync="miniVariant"
       :clipped="clipped"
@@ -31,11 +30,7 @@
       </v-list>
     </v-navigation-drawer> -->
 
-
     <layout-toolbar />
-
-
-
 
     <!-- color="green lighten-5" -->
     <!-- class="mb-4"  style="padding-top: 110px;" -->
@@ -72,7 +67,6 @@
       </div> -->
       <!-- </v-container> -->
     </v-content>
-
 
     <!-- secondary  color="green lighten-4" -->
     <!-- :style="`background: ${$vuetify.theme.secondary};`" -->
@@ -193,7 +187,6 @@
                   mail@gmail.com
                 </p>
 
-
                 <!-- <v-list style="border-radius: 25px; background: rgba(0, 0, 0, .30);" two-line dark>
                   <v-list-tile>
                     <v-list-tile-avatar><v-icon left>phone</v-icon></v-list-tile-avatar>
@@ -211,7 +204,7 @@
                     <v-list-tile-avatar><v-icon left>phone</v-icon></v-list-tile-avatar>
                     <v-list-tile-content>+380960652658</v-list-tile-content>
                   </v-list-tile> -->
-                </v-list>
+                <!--</v-list>-->
               </v-flex>
               <!-- <v-flex xs3>
                 <div class="title text-xs-center">
@@ -237,93 +230,92 @@
       </div>
     </v-footer>
 
-
   </v-app>
 </template>
 
 <script>
-  import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-  import helperScrollMixin from '~/mixins/helpers/scroll'
-  import mixinlayoutElements from '~/mixins/helpers/layoutElements'
-  import LayoutToolbar from '~/components/layouts/default/TheToolbar'
-  import EmailVerificationAlert from '~/components/auth/EmailVerificationAlert'
-  // import * as Cookie from 'js-cookie' // TODO import Cookie from 'js-cookie'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import helperScrollMixin from '~/mixins/helpers/scroll'
+import mixinlayoutElements from '~/mixins/helpers/layoutElements'
+import LayoutToolbar from '~/components/layouts/default/TheToolbar'
+import EmailVerificationAlert from '~/components/auth/EmailVerificationAlert'
+// import * as Cookie from 'js-cookie' // TODO import Cookie from 'js-cookie'
 
-  export default {
-    mixins: [helperScrollMixin, mixinlayoutElements],
-    components: { LayoutToolbar, EmailVerificationAlert, FontAwesomeIcon },
-    data: () => ({
-      icons: [
-        'google-plus',
-        'facebook',
-        'vk',
-        'instagram',
-        'reddit'
-      ]
-    }),
-    watch: {
-      '$route': function () {
-        this.$nextTick(this.mixinslayoutElements_appContentSetDynamicStyles)
-      }
-    },
-    async mounted () {
+export default {
+  mixins: [helperScrollMixin, mixinlayoutElements],
+  components: { LayoutToolbar, EmailVerificationAlert, FontAwesomeIcon },
+  data: () => ({
+    icons: [
+      'google-plus',
+      'facebook',
+      'vk',
+      'instagram',
+      'reddit'
+    ]
+  }),
+  watch: {
+    '$route': function () {
       this.$nextTick(this.mixinslayoutElements_appContentSetDynamicStyles)
-
-      window.addEventListener('resize', this.mixinslayoutElements_appContentSetDynamicStyles)
-    },
-    beforeDestroy () {
-      window.removeEventListener('resize', this.mixinslayoutElements_appContentSetDynamicStyles)
-    },
-    created () {
-      this.$auth.$storage.watchState('loggedIn', newValue => {
-        const token = this.$auth.getToken('local')
-
-        this.$axios.setToken(token)
-        // this.$axios.setHeader('Authorization', localStorage['auth._token.local'])
-
-        // document.location.reload()
-        // this.$axios.setToken(this.$auth.getToken(this.$auth.strategy.name))
-        // console.log(1, localStorage['auth._token.local'])
-      })
-
-      // if (this.$auth.$state.redirect === null) {
-      // {headers: {
-      //   'Authorization': `Bearer ${this.$auth.getToken()}`
-      // }}
-      // console.log(2, localStorage['auth._token.local'])
-      // this.$axios.setHeader('Authorization', localStorage['auth._token.local'])
-      // this.$axios.setToken(this.$auth.getToken(this.$auth.strategy.name))
-      // document.location.reload()
-      // }
     }
+  },
+  async mounted () {
+    this.$nextTick(this.mixinslayoutElements_appContentSetDynamicStyles)
+
+    window.addEventListener('resize', this.mixinslayoutElements_appContentSetDynamicStyles)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.mixinslayoutElements_appContentSetDynamicStyles)
+  },
+  created () {
+    this.$auth.$storage.watchState('loggedIn', newValue => {
+      const token = this.$auth.getToken('local')
+
+      this.$axios.setToken(token)
+      // this.$axios.setHeader('Authorization', localStorage['auth._token.local'])
+
+      // document.location.reload()
+      // this.$axios.setToken(this.$auth.getToken(this.$auth.strategy.name))
+      // console.log(1, localStorage['auth._token.local'])
+    })
+
+    // if (this.$auth.$state.redirect === null) {
+    // {headers: {
+    //   'Authorization': `Bearer ${this.$auth.getToken()}`
+    // }}
+    // console.log(2, localStorage['auth._token.local'])
+    // this.$axios.setHeader('Authorization', localStorage['auth._token.local'])
+    // this.$axios.setToken(this.$auth.getToken(this.$auth.strategy.name))
+    // document.location.reload()
+    // }
   }
+}
 </script>
 
 <style>
-  .footer {
-    /* height: auto !important; */
-    z-index: 1;
-    /* 3 */
-    /* background: #f1f3f4 !important; */
-    /* background: url(http://qaru.site/img/43ba263df12f60c20cad596e7220cd51.jpg) !important; */
-  }
+.footer {
+  /* height: auto !important; */
+  z-index: 1;
+  /* 3 */
+  /* background: #f1f3f4 !important; */
+  /* background: url(http://qaru.site/img/43ba263df12f60c20cad596e7220cd51.jpg) !important; */
+}
 
-  .v-content {
-    padding-top: unset !important;
-    /* padding-bottom: 100px !important; */
-    min-height: 100vh;
-  }
+.v-content {
+  padding-top: unset !important;
+  /* padding-bottom: 100px !important; */
+  min-height: 100vh;
+}
 
-  .application--have-auth-background {
-    /* #eeeeee */
-    background: #40b9be url(https://orig00.deviantart.net/2ee4/f/2014/007/8/f/google_abstract_by_dynamicz34-d718hzj.png) !important;
-  }
+.application--have-auth-background {
+  /* #eeeeee */
+  background: #40b9be url(https://orig00.deviantart.net/2ee4/f/2014/007/8/f/google_abstract_by_dynamicz34-d718hzj.png) !important;
+}
 
-  .application--have-settings-background {
-    background: #fafafa !important;
-  }
+.application--have-settings-background {
+  background: #fafafa !important;
+}
 
-  .v-content__wrap {
-    transition: padding-top 0.5s ease-out;
-  }
+.v-content__wrap {
+  transition: padding-top 0.5s ease-out;
+}
 </style>

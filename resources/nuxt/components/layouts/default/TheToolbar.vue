@@ -34,7 +34,7 @@
       <v-icon right>security</v-icon>
     </v-btn> -->
     <v-text-field
-      @click:append=""
+      @click:append="() => {}"
       append-icon="mic"
       prepend-inner-icon="search"
       class="hidden-sm-and-down mx-3"

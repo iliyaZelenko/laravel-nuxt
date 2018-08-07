@@ -1,0 +1,11 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "scripts": {},
+  "dependencies": {
+    "cropperjs": "^1.4.1",
+    "vuetify": "^1.1.8"
+  },
+  "devDependencies": {},
+  "description": ""
+}

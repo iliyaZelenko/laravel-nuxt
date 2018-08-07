@@ -275,6 +275,13 @@ export default {
       locale
     }
   },
+  watch: {
+    timezonesByCountry (timezones) {
+      if (timezones.length === 1) {
+        this.form.timezone = timezones[0].value
+      }
+    }
+  },
   methods: {
     async submit () {
       if (await this.validateByMixin(this.form)) {
@@ -306,6 +313,7 @@ export default {
       'setUserData'
     ])
   },
+
   // watch: {
   //   'form.timezone' (val) {
   //     if (val.includes('GMT')) {
@@ -333,14 +341,13 @@ export default {
     timezonesByCountry () {
       if (this.form.country) {
         const countryCode = this.form.country
-        const timezones = this.timezones.filter(i => i.countryCode === countryCode)
 
-        console.log(timezones)
-        if (timezones.length === 1) {
-          this.form.timezone = timezones[0].value
-        }
-
-        return timezones
+        return this.timezones.filter(i => i.countryCode === countryCode)
+        // const timezones =
+        // console.log(timezones)
+        // if (timezones.length === 1) {
+        //   this.form.timezone = timezones[0].value
+        // }
       }
       return this.timezones
     },

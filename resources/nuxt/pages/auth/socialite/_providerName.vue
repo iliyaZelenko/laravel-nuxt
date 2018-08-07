@@ -11,7 +11,6 @@
     </v-alert>
     <!-- </v-layout> -->
 
-
     <v-layout v-if="!$auth.loggedIn && user && !userSocResponse.doAuth" fill-height justify-center align-center>
       <v-flex xs12 sm8 md6 lg4 xl3>
 

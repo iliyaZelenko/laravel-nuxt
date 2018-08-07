@@ -50,7 +50,7 @@ const commonConfig = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    ['@nuxtjs/dotenv', { path: './'}],
+    ['@nuxtjs/dotenv', { path: './' }],
     'cookie-universal-nuxt'
   ],
 

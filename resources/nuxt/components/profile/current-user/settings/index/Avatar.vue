@@ -107,6 +107,9 @@ import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { msg } from '~/tools/helpers'
 import UserAvatar from '~/components/user/UserAvatar'
+
+// import 'vue-images-manager'
+
 // import 'vue-images-manager'
 // import AppImgLoader from '~/components/AppImgLoader'
 // import AppImgLoader from 'vue-images-manager'

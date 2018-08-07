@@ -36,7 +36,7 @@
           Бла-бал бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла.</p>
         </div>
         <v-textarea
-          @click:append-outer=""
+          @click:append-outer="() => {}"
           class="mt-3"
           placeholder="Оставить кооментарий"
           append-outer-icon="send"
@@ -91,7 +91,7 @@
         Бла-бал бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла.
         Бла-бал бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла.
         <v-textarea
-          @click:append-outer=""
+          @click:append-outer="() => {}"
           class="mt-3"
           placeholder="Оставить кооментарий"
           append-outer-icon="send"
@@ -127,7 +127,7 @@
         Бла-бал бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла.
         Бла-бал бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла бла-бла.
         <v-textarea
-          @click:append-outer=""
+          @click:append-outer="() => {}"
           class="mt-3"
           placeholder="Оставить кооментарий"
           append-outer-icon="send"
