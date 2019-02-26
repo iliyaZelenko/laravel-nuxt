@@ -1,5 +1,7 @@
 # Laravel Nuxt Auth Starter DEMO
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iliyaZelenko/laravel-nuxt.svg)](https://greenkeeper.io/)
+
 Docs: https://iliyazelenko.github.io/laravel-nuxt/features/
 
 
