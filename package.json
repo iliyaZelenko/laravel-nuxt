@@ -28,7 +28,7 @@
     "cropperjs": "^1.4.0",
     "dayjs": "^1.7.3",
     "laravel-nuxt": "^1.4.5",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "nuxt": "^1.4.0",
     "vee-validate": "^2.0.9",
     "vue-izitoast": "^1.1.0",
